@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:orientation="vertical"
+    android:layout_marginTop="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/home_item_profileImg"
+            android:src="@drawable/default_profile"
+            android:scaleType="centerCrop"
+            android:padding="5dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="10"/>
+
+        <TextView
+            android:id="@+id/home_item_nick"
+            android:text="안녕하세요닉네임"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:gravity="left|center"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="15"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="#A1A1A1" />
+        <TextView
+            android:id="@+id/home_item_level"
+            android:text="Lv.03"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="12"/>
+        <TextView
+            android:id="@+id/home_item_postCount"
+            android:text="게시글 수: 10"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="15"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:orientation="vertical">
+            <ImageButton
+                android:id="@+id/home_item_followBtn"
+                android:src="@drawable/follow_empty"
+                android:scaleType="fitCenter"
+                android:layout_margin="5dp"
+                android:background="#00000000"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="15"/>
+            <TextView
+                android:id="@+id/home_item_followCount"
+                android:text="20"
+                android:textSize="12sp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="10"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
