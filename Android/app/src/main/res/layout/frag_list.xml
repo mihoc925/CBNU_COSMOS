@@ -1,20 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:background="@drawable/layout_shadow">
+        <LinearLayout
+            android:id="@+id/list_locationLayout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="45">
+            <ImageView
+                android:src="@drawable/btn_location"
+                android:scaleType="fitCenter"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="8"/>
+            <TextView
+                android:text="현재위치:"
+                android:fontFamily="@font/binggrae"
+                android:textSize="12sp"
+                android:textColor="#3B4759"
+                android:maxLines="1"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="25"/>
+            <TextView
+                android:text="충북 청주시 여러분 담배꽁초"
+                android:ellipsize="end"
+                android:fontFamily="@font/binggrae"
+                android:textSize="12sp"
+                android:textColor="#3B4759"
+                android:maxLines="1"
+                android:gravity="center|left"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="70"/>
+            <ImageView
+                android:src="@drawable/btn_polygon"
+                android:scaleType="fitCenter"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="6"/>
+        </LinearLayout>
+        <ImageButton
+            android:id="@+id/list_filter"
+            android:background="#00ffffff"
+            android:src="@drawable/btn_filter"
+            android:scaleType="fitCenter"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="10"/>
+        <ImageButton
+            android:visibility="gone"
+            android:id="@+id/list_write"
+            android:background="#00ffffff"
+            android:src="@drawable/btn_write"
+            android:scaleType="fitCenter"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="10"/>
+    </LinearLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="100"
         android:fillViewport="true"
         app:behavior_overlapTop="0dp">
-
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerList"
                 android:layout_width="match_parent"
@@ -22,4 +98,4 @@
                 android:layout_marginBottom="100dp" />
         </ScrollView>
     </androidx.core.widget.NestedScrollView>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>

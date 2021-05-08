@@ -21,7 +21,8 @@
 
         <TextView
             android:id="@+id/home_item_nick"
-            android:text="안녕하세요닉네임"
+            android:text="nickname"
+            android:paddingLeft="5dp"
             android:textSize="12sp"
             android:textStyle="bold"
             android:gravity="left|center"

@@ -1,7 +1,6 @@
 package com.project.specializedproject;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,11 +19,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class FragHomeAdapter extends RecyclerView.Adapter<FragHomeAdapter.ViewHolder> {
     private String TAG = "FragHomeAdapter";
-    private List<ModelList> mData;
+    private List<ModelUser> mUser;
     private Context mContext;
 
-    public FragHomeAdapter(ArrayList<ModelList> arr, Context context) {
-        this.mData = arr;
+    public FragHomeAdapter(ArrayList<ModelUser> user, Context context) {
+        this.mUser = user;
         this.mContext = context;
     }
 
@@ -42,14 +38,14 @@ public class FragHomeAdapter extends RecyclerView.Adapter<FragHomeAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull FragHomeAdapter.ViewHolder holder, int position) {
-//        Log.e(TAG, ">>>"+mData.get(position).getProfileImg());
-        Glide.with(mContext).load(mData.get(position).getProfileImg()).into(holder.home_item_profileImg);
-        holder.home_item_nick.setText(mData.get(position).getNick());
+//        Log.e(TAG, ">>>"+mUser.get(position).getProfileImg());
+//        Glide.with(mContext).load(mUser.get(position).getProfileImg()).into(holder.home_item_profileImg);
+//        holder.home_item_nick.setText(mUser.get(position).getNick());
     }
 
     @Override
     public int getItemCount() {
-        return mData.size();
+        return mUser.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

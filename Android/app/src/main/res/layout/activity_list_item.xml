@@ -1,48 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="400dp"
+    android:layout_height="500dp"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="10">
-        <LinearLayout
+        android:layout_weight="9">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/list_profileImg"
+            android:src="@drawable/default_profile"
+            android:layout_margin="10dp"
+            android:scaleType="centerCrop"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="10">
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profileImg"
-                android:src="@drawable/default_profile"
-                android:layout_margin="5dp"
-                android:scaleType="centerCrop"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="10"/>
-            <TextView
-                android:id="@+id/nick"
-                android:text="테스트입니다."
-                android:textSize="12sp"
-                android:gravity="left|center"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="15"/>
-        </LinearLayout>
-        <LinearLayout
+            android:layout_weight="5"/>
+        <TextView
+            android:id="@+id/list_nick"
+            android:text="nickname"
+            android:fontFamily="@font/binggrae_bold"
+            android:textSize="16sp"
+            android:gravity="left|center"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="20">
-        </LinearLayout>
+            android:layout_weight="35"/>
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="40">
 
-        <ImageButton
+        <ImageView
+            android:id="@+id/list_photo"
             android:src="@drawable/default_scenery"
             android:background="#00000000"
             android:scaleType="centerCrop"
@@ -65,28 +58,33 @@
                 android:layout_height="0dp"
                 android:layout_weight="5">
                 <TextView
+                    android:id="@+id/list_title"
                     android:gravity="center|left"
-                    android:text="벚꽃의 계절 봄, 2021 충북 벚꽃 데이트"
+                    android:text="벚꽃의 계절 봄, 2021 충북 벚꽃 데이트 테스트"
+                    android:fontFamily="@font/maplestory_bold"
+                    android:textColor="#141414"
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:textSize="14sp"
-                    android:textStyle="bold"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="15">
+                android:layout_weight="10">
                 <TextView
+                    android:id="@+id/list_note"
                     android:gravity="center|left"
                     android:text="간단한 설명입니다. 간단한 설명입니다. 간단한 설명
 명입니다. 간단한 설명입니다. 간단한 설명입니다. 간단한 설명입니다. 간단한 설명
 명입니다. 간단한 설명입니다. 간단한 설명입니다."
-                    android:maxLines="3"
+                    android:fontFamily="@font/maplestory_light"
+                    android:textColor="#141414"
+                    android:layout_marginLeft="10dp"
+                    android:maxLines="4"
                     android:ellipsize="end"
                     android:textSize="12sp"
-                    android:textStyle="bold"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
             </LinearLayout>
@@ -98,18 +96,23 @@
                 <TextView
                     android:gravity="center|left"
                     android:text="모든 댓글 보기"
+                    android:textColor="#777777"
                     android:textSize="12sp"
                     android:textStyle="bold"
+                    android:layout_marginLeft="15dp"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="10"/>
                 <TextView
+                    android:id="@+id/list_reply"
                     android:gravity="center|left"
-                    android:text="아이디   댓글입니다. 댓글입니다. 댓글입니다."
-                    android:maxLines="1"
+                    android:text="아이디   댓글입니다. 댓글입니다. 댓글입니다. 댓글입니다. 댓글입니다. 댓글입니다. 댓글입니다."
+                    android:textColor="#141414"
+                    android:maxLines="2"
                     android:ellipsize="end"
                     android:textSize="12sp"
                     android:textStyle="bold"
+                    android:layout_marginLeft="15dp"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="15"/>
@@ -124,20 +127,129 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="10">
-
+                <ImageView
+                    android:src="@drawable/content_count"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"/>
+                <TextView
+                    android:id="@+id/list_contentCount"
+                    android:text="123"
+                    android:fontFamily="@font/maplestory_bold"
+                    android:textColor="#828282"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="10"/>
+                <ImageView
+                    android:src="@drawable/follow_full"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"/>
+                <TextView
+                    android:id="@+id/list_contentFollow"
+                    android:text="1234"
+                    android:fontFamily="@font/maplestory_bold"
+                    android:textColor="#828282"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="10"/>
+                <ImageView
+                    android:src="@drawable/content_completion"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"/>
+                <TextView
+                    android:id="@+id/list_contentCompletion"
+                    android:text="123"
+                    android:fontFamily="@font/maplestory_bold"
+                    android:textColor="#828282"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="10"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="20"
                 android:orientation="vertical">
-
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="10">
+                    <ImageView
+                        android:padding="3dp"
+                        android:src="@drawable/content_distance"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="4"/>
+                    <TextView
+                        android:text="예상 거리"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/maplestory_bold"
+                        android:textColor="#585858"
+                        android:gravity="center"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="7"/>
+                    <TextView
+                        android:id="@+id/list_contentDistance"
+                        android:text="10.04Km"
+                        android:fontFamily="@font/maplestory_bold"
+                        android:textColor="#3182FC"
+                        android:textSize="14sp"
+                        android:gravity="center"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="10"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="10">
+                    <ImageView
+                        android:padding="5dp"
+                        android:src="@drawable/content_time"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="4"/>
+                    <TextView
+                        android:text="예상 시간"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/maplestory_bold"
+                        android:textColor="#585858"
+                        android:gravity="center"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="7"/>
+                    <TextView
+                        android:id="@+id/list_contentTime"
+                        android:text="1시간 50분"
+                        android:fontFamily="@font/maplestory_bold"
+                        android:textColor="#3182FC"
+                        android:textSize="14sp"
+                        android:gravity="center"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="10"/>
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="15"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:background="#E6E6E6" />
 </LinearLayout>

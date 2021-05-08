@@ -2,7 +2,6 @@ package com.project.specializedproject;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +25,7 @@ public class FragHome extends Fragment {
     RecyclerView rList;
     FragHomeAdapter homeAdapter;
 
-    ArrayList<ModelList> mData = new ArrayList<>();
+    ArrayList<ModelUser> mUser = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,7 +37,7 @@ public class FragHome extends Fragment {
         setFirebase();
 
         rList.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
-        homeAdapter = new FragHomeAdapter(mData, getContext());
+        homeAdapter = new FragHomeAdapter(mUser, getContext());
         rList.setAdapter(homeAdapter);
         return view;
     }
@@ -48,11 +47,11 @@ public class FragHome extends Fragment {
         searchData.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                mData.clear();
+                mUser.clear();
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    ModelList user = snapshot.getValue(ModelList.class);
-                    mData.add(user);
+                    ModelUser user = snapshot.getValue(ModelUser.class);
+                    mUser.add(user);
                 }
                 homeAdapter.notifyDataSetChanged();
             }
