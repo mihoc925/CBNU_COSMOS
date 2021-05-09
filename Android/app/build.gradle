@@ -36,6 +36,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics' // firebase_analytics
     implementation 'com.google.firebase:firebase-messaging' // firebase_messaging
     implementation 'com.google.firebase:firebase-auth:19.3.2' // firebase_auth
+    implementation 'com.google.firebase:firebase-storage' // firebase_storage
 
     implementation 'com.google.android.material:material:1.2.0' // Material Design - For UI Design
     implementation 'com.etebarian:meow-bottom-navigation-java:1.2.0' // Meow Bottom Navigation

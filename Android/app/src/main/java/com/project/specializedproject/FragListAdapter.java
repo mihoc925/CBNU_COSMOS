@@ -29,6 +29,8 @@ public class FragListAdapter extends RecyclerView.Adapter<FragListAdapter.ViewHo
     private List<ModelFeed> mFeed;
     private Context mContext;
 
+    int contentCount;
+
     public FragListAdapter(ArrayList<ModelFeed> feed, Context context) {
         this.mFeed = feed;
         this.mContext = context;
@@ -58,16 +60,28 @@ public class FragListAdapter extends RecyclerView.Adapter<FragListAdapter.ViewHo
             public void onCancelled(DatabaseError databaseError) { }
         });
 
-        Glide.with(mContext).load(mFeed.get(position).getPhoto()).into(holder.list_photo);
-        holder.list_title.setText(mFeed.get(position).getTitle());
-        holder.list_note.setText(mFeed.get(position).getNote());
-        holder.list_reply.setText(mFeed.get(position).getReply());
+        contentCounting(position);
 
-        holder.list_contentCount.setText(mFeed.get(position).getContentCount());
-        holder.list_contentFollow.setText(mFeed.get(position).getContentFollow());
-        holder.list_contentCompletion.setText(mFeed.get(position).getContentCompletion());
-        holder.list_contentDistance.setText(mFeed.get(position).getContentDistance());
-        holder.list_contentTime.setText(mFeed.get(position).getContentTime());
+        holder.list_title.setText(mFeed.get(position).getFeedW_title0());
+        holder.list_note.setText(mFeed.get(position).getFeedW_note0());
+        Glide.with(mContext).load(mFeed.get(position).getFeedW_photo0()).into(holder.list_photo);
+//        holder.list_reply.setText(mFeed.get(position).getReply());
+
+        holder.list_contentCount.setText(String.valueOf(contentCount));
+//        holder.list_contentFollow.setText(mFeed.get(position).getContentFollow());
+//        holder.list_contentCompletion.setText(mFeed.get(position).getContentCompletion());
+        holder.list_contentDistance.setText(mFeed.get(position).getFeedW_distance());
+        holder.list_contentTime.setText(mFeed.get(position).getFeedW_time());
+    }
+
+    private void contentCounting(int position){
+        contentCount = 0;
+        if(mFeed.get(position).getFeedW_title1() != null && !mFeed.get(position).getFeedW_title1().equals(""))
+            contentCount = 1;
+        if(mFeed.get(position).getFeedW_title2() != null && !mFeed.get(position).getFeedW_title2().equals(""))
+            contentCount = 2;
+        if(mFeed.get(position).getFeedW_title3() != null && !mFeed.get(position).getFeedW_title3().equals(""))
+            contentCount = 3;
     }
 
     @Override

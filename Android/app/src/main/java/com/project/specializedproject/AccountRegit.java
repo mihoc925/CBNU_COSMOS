@@ -156,7 +156,7 @@ public class AccountRegit extends AppCompatActivity {
     }
 
     private void RegisterNow(final String emailStr, String nickStr, String phoneStr, String passStr) {
-        FirebaseAuth fAuth = FirebaseAuth.getInstance();;
+        FirebaseAuth fAuth = FirebaseAuth.getInstance();
         fAuth.createUserWithEmailAndPassword(emailStr, passStr).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {

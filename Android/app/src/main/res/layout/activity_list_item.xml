@@ -10,7 +10,6 @@
         android:layout_weight="9">
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/list_profileImg"
-            android:src="@drawable/default_profile"
             android:layout_margin="10dp"
             android:scaleType="centerCrop"
             android:layout_width="0dp"
@@ -18,7 +17,6 @@
             android:layout_weight="5"/>
         <TextView
             android:id="@+id/list_nick"
-            android:text="nickname"
             android:fontFamily="@font/binggrae_bold"
             android:textSize="16sp"
             android:gravity="left|center"
@@ -60,7 +58,6 @@
                 <TextView
                     android:id="@+id/list_title"
                     android:gravity="center|left"
-                    android:text="벚꽃의 계절 봄, 2021 충북 벚꽃 데이트 테스트"
                     android:fontFamily="@font/maplestory_bold"
                     android:textColor="#141414"
                     android:maxLines="1"
@@ -76,9 +73,6 @@
                 <TextView
                     android:id="@+id/list_note"
                     android:gravity="center|left"
-                    android:text="간단한 설명입니다. 간단한 설명입니다. 간단한 설명
-명입니다. 간단한 설명입니다. 간단한 설명입니다. 간단한 설명입니다. 간단한 설명
-명입니다. 간단한 설명입니다. 간단한 설명입니다."
                     android:fontFamily="@font/maplestory_light"
                     android:textColor="#141414"
                     android:layout_marginLeft="10dp"
@@ -106,7 +100,7 @@
                 <TextView
                     android:id="@+id/list_reply"
                     android:gravity="center|left"
-                    android:text="아이디   댓글입니다. 댓글입니다. 댓글입니다. 댓글입니다. 댓글입니다. 댓글입니다. 댓글입니다."
+                    android:text="아이디   댓글입니다."
                     android:textColor="#141414"
                     android:maxLines="2"
                     android:ellipsize="end"
@@ -134,7 +128,7 @@
                     android:layout_weight="5"/>
                 <TextView
                     android:id="@+id/list_contentCount"
-                    android:text="123"
+                    android:text="00"
                     android:fontFamily="@font/maplestory_bold"
                     android:textColor="#828282"
                     android:textSize="14sp"
@@ -149,7 +143,7 @@
                     android:layout_weight="5"/>
                 <TextView
                     android:id="@+id/list_contentFollow"
-                    android:text="1234"
+                    android:text="00"
                     android:fontFamily="@font/maplestory_bold"
                     android:textColor="#828282"
                     android:textSize="14sp"
@@ -164,7 +158,7 @@
                     android:layout_weight="5"/>
                 <TextView
                     android:id="@+id/list_contentCompletion"
-                    android:text="123"
+                    android:text="00"
                     android:fontFamily="@font/maplestory_bold"
                     android:textColor="#828282"
                     android:textSize="14sp"
@@ -199,7 +193,6 @@
                         android:layout_weight="7"/>
                     <TextView
                         android:id="@+id/list_contentDistance"
-                        android:text="10.04Km"
                         android:fontFamily="@font/maplestory_bold"
                         android:textColor="#3182FC"
                         android:textSize="14sp"
@@ -229,7 +222,6 @@
                         android:layout_weight="7"/>
                     <TextView
                         android:id="@+id/list_contentTime"
-                        android:text="1시간 50분"
                         android:fontFamily="@font/maplestory_bold"
                         android:textColor="#3182FC"
                         android:textSize="14sp"

@@ -675,6 +675,7 @@
                 </LinearLayout>
 
                 <Button
+                    android:id="@+id/feedW_submit"
                     android:text="포스팅"
                     android:textSize="18sp"
                     android:textStyle="bold"
