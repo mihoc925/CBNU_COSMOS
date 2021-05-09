@@ -1,0 +1,728 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        app:behavior_overlapTop="0dp">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/feedW_layout0"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="10" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="30"
+                            android:background="#FFFFFF"
+                            android:fontFamily="@font/roboto"
+                            android:gravity="center"
+                            android:text="메인 피드"
+                            android:textColor="#000000"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="70" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_margin="5dp"
+                        android:background="#AAAAAA" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="5dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="20"
+                            android:fontFamily="@font/roboto"
+                            android:gravity="center"
+                            android:text="제목"
+                            android:textColor="#000000"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/feedW_title0"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="70"
+                            android:fontFamily="@font/roboto"
+                            android:gravity="center|left"
+                            android:hint="필수 입력"
+                            android:textColor="#000000"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="5dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="20"
+                            android:fontFamily="@font/roboto"
+                            android:gravity="center"
+                            android:text="내용"
+                            android:textColor="#000000"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/feedW_note0"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="70"
+                            android:fontFamily="@font/roboto"
+                            android:gravity="center|left"
+                            android:hint="필수 입력"
+                            android:inputType="textMultiLine"
+                            android:lines="7"
+                            android:maxLines="10"
+                            android:scrollbars="vertical"
+                            android:textColor="#000000"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="5dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="20"
+                            android:fontFamily="@font/roboto"
+                            android:gravity="center"
+                            android:text="이미지\n추가"
+                            android:textColor="#000000"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <ImageButton
+                            android:id="@+id/feedW_photo0"
+                            android:layout_width="0dp"
+                            android:layout_height="100dp"
+                            android:layout_weight="70"
+                            android:background="#00ffffff"
+                            android:foregroundGravity="center"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/btn_plus_img" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="5dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="20"
+                            android:fontFamily="@font/roboto"
+                            android:gravity="center"
+                            android:text="주요 위치"
+                            android:textColor="#000000"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <Button
+                            android:id="@+id/feedW_location0"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="70"
+                            android:fontFamily="@font/roboto"
+                            android:background="@drawable/layout_shadow"
+                            android:gravity="center|left"
+                            android:paddingLeft="10dp"
+                            android:hint="클릭해 주세요."
+                            android:textColor="#000000"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="5dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="20"
+                            android:fontFamily="@font/roboto"
+                            android:gravity="center"
+                            android:text="예상 거리"
+                            android:textColor="#000000"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/feedW_distance"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="70"
+                            android:fontFamily="@font/roboto"
+                            android:gravity="center|left"
+                            android:hint="예) 12.34 = 12.34 Km"
+                            android:textColor="#000000"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="5dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="20"
+                            android:fontFamily="@font/roboto"
+                            android:gravity="center"
+                            android:text="예상 시간"
+                            android:textColor="#000000"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/feedW_time"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="70"
+                            android:fontFamily="@font/roboto"
+                            android:gravity="center|left"
+                            android:hint="예) 140 = 2시간 20분"
+                            android:textColor="#000000"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/feedW_layout1"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <View
+                        android:background="#AAAAAA"
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp"
+                        android:layout_marginBottom="20dp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="10"/>
+                        <TextView
+                            android:text="도전과제1"
+                            android:fontFamily="@font/roboto"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="#000000"
+                            android:background="#fafafa"
+                            android:gravity="center"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="20"/>
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="70"/>
+                    </LinearLayout>
+                    <View
+                        android:background="#AAAAAA"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_margin="10dp"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="5dp">
+                        <TextView
+                            android:text="제목"
+                            android:fontFamily="@font/roboto"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="#000000"
+                            android:gravity="center"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="20"/>
+                        <EditText
+                            android:id="@+id/feedW_title1"
+                            android:hint="도전과제1 제목"
+                            android:fontFamily="@font/roboto"
+                            android:textSize="14sp"
+                            android:textColor="#000000"
+                            android:gravity="center|left"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="70"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="5dp">
+                        <TextView
+                            android:text="내용"
+                            android:fontFamily="@font/roboto"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="#000000"
+                            android:gravity="center"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="20"/>
+                        <EditText
+                            android:id="@+id/feedW_note1"
+                            android:hint="도전과제1 내용"
+                            android:fontFamily="@font/roboto"
+                            android:textSize="14sp"
+                            android:textColor="#000000"
+                            android:inputType="textMultiLine"
+                            android:lines="7"
+                            android:maxLines="10"
+                            android:scrollbars="vertical"
+                            android:gravity="center|left"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="70"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="5dp">
+                        <TextView
+                            android:text="이미지\n추가"
+                            android:fontFamily="@font/roboto"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="#000000"
+                            android:gravity="center"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="20"/>
+                        <ImageButton
+                            android:id="@+id/feedW_photo1"
+                            android:background="#00ffffff"
+                            android:src="@drawable/btn_plus_img"
+                            android:foregroundGravity="center"
+                            android:scaleType="centerCrop"
+                            android:layout_width="0dp"
+                            android:layout_height="100dp"
+                            android:layout_weight="70"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:text="포토존\n위치"
+                            android:fontFamily="@font/roboto"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="#000000"
+                            android:gravity="center"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="20"/>
+                        <Button
+                            android:id="@+id/feedW_location1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="70"
+                            android:fontFamily="@font/roboto"
+                            android:background="@drawable/layout_shadow"
+                            android:gravity="center|left"
+                            android:paddingLeft="10dp"
+                            android:hint="클릭해 주세요."
+                            android:textColor="#000000"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/feedW_layout2"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <View
+                        android:background="#AAAAAA"
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp"
+                        android:layout_marginBottom="20dp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="10"/>
+                        <TextView
+                            android:text="도전과제2"
+                            android:fontFamily="@font/roboto"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="#000000"
+                            android:background="#fafafa"
+                            android:gravity="center"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="20"/>
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="70"/>
+                    </LinearLayout>
+                    <View
+                        android:background="#AAAAAA"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_margin="10dp"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="5dp">
+                        <TextView
+                            android:text="제목"
+                            android:fontFamily="@font/roboto"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="#000000"
+                            android:gravity="center"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="20"/>
+                        <EditText
+                            android:id="@+id/feedW_title2"
+                            android:hint="도전과제2 제목"
+                            android:fontFamily="@font/roboto"
+                            android:textSize="14sp"
+                            android:textColor="#000000"
+                            android:gravity="center|left"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="70"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="5dp">
+                        <TextView
+                            android:text="내용"
+                            android:fontFamily="@font/roboto"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="#000000"
+                            android:gravity="center"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="20"/>
+                        <EditText
+                            android:id="@+id/feedW_note2"
+                            android:hint="도전과제2 내용"
+                            android:fontFamily="@font/roboto"
+                            android:textSize="14sp"
+                            android:textColor="#000000"
+                            android:inputType="textMultiLine"
+                            android:lines="7"
+                            android:maxLines="10"
+                            android:scrollbars="vertical"
+                            android:gravity="center|left"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="70"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="5dp">
+                        <TextView
+                            android:text="이미지\n추가"
+                            android:fontFamily="@font/roboto"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="#000000"
+                            android:gravity="center"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="20"/>
+                        <ImageButton
+                            android:id="@+id/feedW_photo2"
+                            android:background="#00ffffff"
+                            android:src="@drawable/btn_plus_img"
+                            android:foregroundGravity="center"
+                            android:scaleType="centerCrop"
+                            android:layout_width="0dp"
+                            android:layout_height="100dp"
+                            android:layout_weight="70"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:text="포토존\n위치"
+                            android:fontFamily="@font/roboto"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="#000000"
+                            android:gravity="center"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="20"/>
+                        <Button
+                            android:id="@+id/feedW_location2"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="70"
+                            android:fontFamily="@font/roboto"
+                            android:background="@drawable/layout_shadow"
+                            android:gravity="center|left"
+                            android:paddingLeft="10dp"
+                            android:hint="클릭해 주세요."
+                            android:textColor="#000000"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/feedW_layout3"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <View
+                        android:background="#AAAAAA"
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp"
+                        android:layout_marginBottom="20dp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="10"/>
+                        <TextView
+                            android:text="도전과제3"
+                            android:fontFamily="@font/roboto"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="#000000"
+                            android:background="#fafafa"
+                            android:gravity="center"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="20"/>
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="70"/>
+                    </LinearLayout>
+                    <View
+                        android:background="#AAAAAA"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_margin="10dp"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="5dp">
+                        <TextView
+                            android:text="제목"
+                            android:fontFamily="@font/roboto"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="#000000"
+                            android:gravity="center"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="20"/>
+                        <EditText
+                            android:id="@+id/feedW_title3"
+                            android:hint="도전과제3 제목"
+                            android:fontFamily="@font/roboto"
+                            android:textSize="14sp"
+                            android:textColor="#000000"
+                            android:gravity="center|left"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="70"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="5dp">
+                        <TextView
+                            android:text="내용"
+                            android:fontFamily="@font/roboto"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="#000000"
+                            android:gravity="center"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="20"/>
+                        <EditText
+                            android:id="@+id/feedW_note3"
+                            android:hint="도전과제3 내용"
+                            android:fontFamily="@font/roboto"
+                            android:textSize="14sp"
+                            android:textColor="#000000"
+                            android:inputType="textMultiLine"
+                            android:lines="7"
+                            android:maxLines="10"
+                            android:scrollbars="vertical"
+                            android:gravity="center|left"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="70"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="5dp">
+                        <TextView
+                            android:text="이미지\n추가"
+                            android:fontFamily="@font/roboto"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="#000000"
+                            android:gravity="center"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="20"/>
+                        <ImageButton
+                            android:id="@+id/feedW_photo3"
+                            android:background="#00ffffff"
+                            android:src="@drawable/btn_plus_img"
+                            android:foregroundGravity="center"
+                            android:scaleType="centerCrop"
+                            android:layout_width="0dp"
+                            android:layout_height="100dp"
+                            android:layout_weight="70"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:text="포토존\n위치"
+                            android:fontFamily="@font/roboto"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="#000000"
+                            android:gravity="center"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="20"/>
+                        <Button
+                            android:id="@+id/feedW_location3"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="70"
+                            android:fontFamily="@font/roboto"
+                            android:background="@drawable/layout_shadow"
+                            android:gravity="center|left"
+                            android:paddingLeft="10dp"
+                            android:hint="클릭해 주세요."
+                            android:textColor="#000000"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <Button
+                    android:text="포스팅"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:background="@drawable/round_edge10_btn_a70"
+                    android:layout_marginLeft="100dp"
+                    android:layout_marginRight="100dp"
+                    android:layout_marginBottom="70dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+        </ScrollView>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <TextView
+                android:text="도전과제 추가하기"
+                android:fontFamily="@font/roboto"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="70"/>
+            <ImageButton
+                android:id="@+id/feedW_plusBtn"
+                android:background="#00ffffff"
+                android:src="@drawable/btn_plus"
+                android:scaleType="fitCenter"
+                android:layout_margin="5dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"/>
+            <ImageButton
+                android:id="@+id/feedW_minusBtn"
+                android:background="#00ffffff"
+                android:src="@drawable/btn_minus"
+                android:scaleType="fitCenter"
+                android:layout_margin="5dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"/>
+        </LinearLayout>
+    </com.google.android.material.bottomappbar.BottomAppBar>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

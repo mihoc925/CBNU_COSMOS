@@ -17,11 +17,13 @@
         android:roundIcon="@mipmap/ic_cosmos"
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents.Light.NoActionBar.Bridge">
+        <activity android:name=".FeedWrite"></activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".AccountRegit" />
         <activity android:name=".AccountLogin">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

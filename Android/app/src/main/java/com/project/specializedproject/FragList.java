@@ -1,6 +1,7 @@
 package com.project.specializedproject;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -34,6 +36,7 @@ public class FragList extends Fragment {
     FragListAdapter listAdapter;
 
     ArrayList<ModelFeed> mFeed = new ArrayList<>();
+    String userPermission;
 
     LinearLayout list_locationLayout;
     ImageButton list_filter, list_write;
@@ -86,11 +89,14 @@ public class FragList extends Fragment {
                     ModelUser user = dataSnapshot.getValue(ModelUser.class);
                     if(user.getPermission().equals("Guide")){
                         list_write.setVisibility(View.VISIBLE);
+                        userPermission = "Guide";
                     }else{
                         list_write.setVisibility(View.GONE);
+                        userPermission = "Traveler";
                     }
                 }else{
                     list_write.setVisibility(View.GONE);
+                    userPermission = "Traveler";
                 }
             }
 
@@ -112,54 +118,16 @@ public class FragList extends Fragment {
     public void onClick(View view){
         if(view.getId() == R.id.list_locationLayout){
             Log.e(TAG, "list_locationLayout");
+
         }else if(view.getId() == R.id.list_filter){
             Log.e(TAG, "list_filter");
+
         }else if(view.getId() == R.id.list_write){
-            Log.e(TAG, "list_write");
+            if(!userPermission.equals("Traveler")){
+                startActivity(new Intent(mContext, FeedWrite.class));
+            }else {
+                Toast.makeText(mContext, "가이드가 아닙니다.",Toast.LENGTH_SHORT).show();
+            }
         }
-    }
-
-
-
-
-    private void onStarClicked() {
-        FirebaseAuth fAuth = FirebaseAuth.getInstance();
-        DatabaseReference auto_increment = FirebaseDatabase.getInstance()
-                .getReference("UserData").child(fAuth.getCurrentUser().getUid()).child("fid");
-        auto_increment.runTransaction(new Transaction.Handler() {
-            @Override
-            public Transaction.Result doTransaction(MutableData mutableData) {
-                ModelUser model = mutableData.getValue(ModelUser.class);
-
-                if (model == null) {
-                    mutableData.setValue(1);
-                    Log.d(TAG, "model null:"+mutableData.getValue());
-                }else{
-                    mutableData.setValue((Long) mutableData.getValue() + 1);
-                    Log.d(TAG, "model else:"+mutableData.getValue());
-                }
-
-//                if (model.stars.containsKey(getUid())) {
-//                    // Unstar the post and remove self from stars
-//                    model.starCount = model.starCount - 1;
-//                    model.stars.remove(getUid());
-//                } else {
-//                    // Star the post and add self to stars
-//                    model.starCount = model.starCount + 1;
-//                    model.stars.put(getUid(), true);
-//                }
-
-                // Set value and report transaction success
-//                mutableData.setValue(model);
-                return Transaction.success(mutableData);
-            }
-
-            @Override
-            public void onComplete(DatabaseError databaseError, boolean committed,
-                                   DataSnapshot currentData) {
-                // Transaction completed
-                Log.d(TAG, "postTransaction:onComplete:" + databaseError);
-            }
-        });
     }
 }
