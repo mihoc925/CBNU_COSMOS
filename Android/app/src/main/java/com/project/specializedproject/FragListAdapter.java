@@ -60,18 +60,18 @@ public class FragListAdapter extends RecyclerView.Adapter<FragListAdapter.ViewHo
             public void onCancelled(DatabaseError databaseError) { }
         });
 
-        contentCounting(position);
 
         holder.list_title.setText(mFeed.get(position).getFeedW_title0());
         holder.list_note.setText(mFeed.get(position).getFeedW_note0());
         Glide.with(mContext).load(mFeed.get(position).getFeedW_photo0()).into(holder.list_photo);
 //        holder.list_reply.setText(mFeed.get(position).getReply());
 
+        contentCounting(position);
         holder.list_contentCount.setText(String.valueOf(contentCount));
 //        holder.list_contentFollow.setText(mFeed.get(position).getContentFollow());
 //        holder.list_contentCompletion.setText(mFeed.get(position).getContentCompletion());
-        holder.list_contentDistance.setText(mFeed.get(position).getFeedW_distance());
-        holder.list_contentTime.setText(mFeed.get(position).getFeedW_time());
+        holder.list_contentDistance.setText(contentDistance_Cal(mFeed.get(position).getFeedW_distance()));
+        holder.list_contentTime.setText(contentTime_Cal(mFeed.get(position).getFeedW_time()));
     }
 
     private void contentCounting(int position){
@@ -82,6 +82,27 @@ public class FragListAdapter extends RecyclerView.Adapter<FragListAdapter.ViewHo
             contentCount = 2;
         if(mFeed.get(position).getFeedW_title3() != null && !mFeed.get(position).getFeedW_title3().equals(""))
             contentCount = 3;
+    }
+
+    private String contentDistance_Cal(String x){
+        if(x != null && !x.equals("")) {
+            double calX = Double.parseDouble(x);
+            x = Math.round((calX / 1000)*100)/100.0 + "km";
+        }
+        return x;
+    }
+
+    private String contentTime_Cal(String x){
+        if(x != null && !x.equals("")) {
+            int calX = Integer.parseInt(x);
+            int hour = (calX / 60);
+            int min = (calX % 60);
+            if(min < 10)
+                x = hour + "시간 0" + min + "분";
+            else
+                x = hour + "시간 " + min + "분";
+        }
+        return x;
     }
 
     @Override
