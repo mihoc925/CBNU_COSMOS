@@ -146,7 +146,11 @@ public class AccountRegit extends AppCompatActivity {
         searchData.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                nickExistence = !dataSnapshot.exists();
+                if(dataSnapshot.exists()){
+                    nickExistence = false;
+                }else{
+                    nickExistence = true;
+                }
             }
 
             @Override

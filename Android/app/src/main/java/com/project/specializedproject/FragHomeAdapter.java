@@ -1,6 +1,7 @@
 package com.project.specializedproject;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,9 +39,8 @@ public class FragHomeAdapter extends RecyclerView.Adapter<FragHomeAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull FragHomeAdapter.ViewHolder holder, int position) {
-//        Log.e(TAG, ">>>"+mUser.get(position).getProfileImg());
-//        Glide.with(mContext).load(mUser.get(position).getProfileImg()).into(holder.home_item_profileImg);
-//        holder.home_item_nick.setText(mUser.get(position).getNick());
+        Glide.with(mContext).load(mUser.get(position).getProfileImg()).into(holder.home_item_profileImg);
+        holder.home_item_nick.setText(mUser.get(position).getNick());
     }
 
     @Override

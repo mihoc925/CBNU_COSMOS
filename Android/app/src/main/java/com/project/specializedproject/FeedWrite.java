@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -54,6 +55,7 @@ import java.util.regex.Pattern;
 
 public class FeedWrite extends AppCompatActivity {
     private String TAG = "FeedWrite";
+    ProgressDialog pd;
 
     LinearLayout feedW_layout0, feedW_layout1, feedW_layout2, feedW_layout3;
     TextView feedW_title0, feedW_title1, feedW_title2, feedW_title3;
@@ -145,6 +147,10 @@ public class FeedWrite extends AppCompatActivity {
     }
 
     private void createFid(){
+        pd = new ProgressDialog(FeedWrite.this);
+        pd.setMessage("잠시만 기다려주세요");
+        pd.show();
+
         Query searchData = FirebaseDatabase.getInstance().getReference("Feed").orderByChild("fid").limitToLast(1);
         searchData.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -217,9 +223,13 @@ public class FeedWrite extends AppCompatActivity {
     private void submit_Data(){
         FirebaseAuth fAuth = FirebaseAuth.getInstance();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Feed").child(String.valueOf(fid));
+        SimpleDateFormat sdf= new SimpleDateFormat("yyyy/MM/dd_hh:mm:ss");
+
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("fid", fid);
         hashMap.put("uid", fAuth.getCurrentUser().getUid());
+        hashMap.put("c_date", sdf.format(new Date()));
+        hashMap.put("u_date", sdf.format(new Date()));
         hashMap.put("feedW_title0", feedW_title0.getText().toString());
         hashMap.put("feedW_note0", feedW_note0.getText().toString());
         hashMap.put("feedW_photo0", photo[0]);
@@ -251,17 +261,17 @@ public class FeedWrite extends AppCompatActivity {
                 }
             }
         }
+        pd.dismiss();
+
         ref.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-                    // todo 다이얼로그
-                    Log.e(TAG, "true!");
                     finish();
+                    Toast.makeText(getApplicationContext(), "데이터 코스를 등록했습니다!",Toast.LENGTH_SHORT).show();
                 }
                 if (task.isCanceled()) {
-                    // todo 다이얼로그
-                    Log.e(TAG, "false!");
+                    Toast.makeText(getApplicationContext(), "등록에 실패했습니다.",Toast.LENGTH_SHORT).show();
                 }
             }
         });

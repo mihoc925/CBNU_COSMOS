@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     boolean readStoragePermission;
     boolean cameraPermission;
 
-    MeowBottomNavigation Bottomnavigation;
+    public MeowBottomNavigation Bottomnavigation;
     Fragment selcect_fragment = null;
 
     @Override

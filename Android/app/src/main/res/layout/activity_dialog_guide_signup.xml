@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/round_edge20">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="20dp">
+
+        <TextView
+            android:text="가이드 신청 주의사항"
+            android:fontFamily="@font/roboto"
+            android:textColor="#000000"
+            android:gravity="center|left"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10"/>
+        <TextView
+            android:text="
+    1. 상업적/불법적 게시글 업로드\n
+    2. 관련없는 게시글의 반복적 업로드\n
+    3. 권한 남용\n\n
+부합하는 내용이 있을 경우 권한이 박탈됩니다."
+            android:fontFamily="@font/roboto"
+            android:textColor="#222222"
+            android:gravity="center|left"
+            android:textSize="12sp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="30"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10">
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5"/>
+            <Button
+                android:id="@+id/dialog_guide_signup"
+                android:text="신청하기"
+                android:fontFamily="@font/roboto"
+                android:textSize="14sp"
+                android:background="@drawable/round_edge10_btn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="10"/>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5"/>
+            <Button
+                android:id="@+id/dialog_guide_cancel"
+                android:text="취소"
+                android:fontFamily="@font/roboto"
+                android:textSize="14sp"
+                android:background="@drawable/round_edge10_btn_a70_gray"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="10"/>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

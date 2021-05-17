@@ -63,6 +63,13 @@ public class FragListAdapter extends RecyclerView.Adapter<FragListAdapter.ViewHo
 
         holder.list_title.setText(mFeed.get(position).getFeedW_title0());
         holder.list_note.setText(mFeed.get(position).getFeedW_note0());
+
+
+//        Log.e(TAG, "date = "+mFeed.get(position).getC_date());
+//        holder.list_date.setText(mFeed.get(position).getC_date());
+        holder.list_date.setText(viewDate(mFeed.get(position).getC_date(), mFeed.get(position).getU_date()));
+
+
         Glide.with(mContext).load(mFeed.get(position).getFeedW_photo0()).into(holder.list_photo);
 //        holder.list_reply.setText(mFeed.get(position).getReply());
 
@@ -72,6 +79,32 @@ public class FragListAdapter extends RecyclerView.Adapter<FragListAdapter.ViewHo
 //        holder.list_contentCompletion.setText(mFeed.get(position).getContentCompletion());
         holder.list_contentDistance.setText(contentDistance_Cal(mFeed.get(position).getFeedW_distance()));
         holder.list_contentTime.setText(contentTime_Cal(mFeed.get(position).getFeedW_time()));
+    }
+
+    private String viewDate(String cdate, String udate){
+        int i = 0;
+        String outputDate = "";
+
+        String[] tmpCdate = cdate.split("_"); // 포멧 변경
+        String[] tmpUdate = udate.split("_");
+        String tempCdate = tmpCdate[0];
+        String tempUdate = tmpUdate[0];
+        String[] strCdate = tempCdate.split("/");
+        String[] strUdate = tempUdate.split("/");
+
+        String valCdate = ""; // 날짜 비교
+        String valUdate = "";
+        for(i=0; i<strCdate.length; i++)
+            valCdate += strCdate[i];
+        for(i=0; i<strUdate.length; i++)
+            valUdate += strUdate[i];
+
+        if(Integer.parseInt(valCdate) >= Integer.parseInt(valUdate))
+            outputDate = strCdate[0] + "." + strCdate[1] + "." + strCdate[2];
+        else
+            outputDate = strUdate[0] + "." + strUdate[1] + "." + strUdate[2];
+
+        return outputDate;
     }
 
     private void contentCounting(int position){
@@ -114,7 +147,7 @@ public class FragListAdapter extends RecyclerView.Adapter<FragListAdapter.ViewHo
 
         CircleImageView list_profileImg;
         ImageView list_photo;
-        TextView list_nick, list_title, list_note, list_reply,
+        TextView list_nick, list_title, list_note, list_reply, list_date,
                 list_contentCount, list_contentFollow, list_contentCompletion,
                 list_contentDistance, list_contentTime;
 
@@ -126,6 +159,7 @@ public class FragListAdapter extends RecyclerView.Adapter<FragListAdapter.ViewHo
             list_title = itemView.findViewById(R.id.list_title);
             list_note = itemView.findViewById(R.id.list_note);
             list_reply = itemView.findViewById(R.id.list_reply);
+            list_date = itemView.findViewById(R.id.list_date);
 
             list_contentCount = itemView.findViewById(R.id.list_contentCount);
             list_contentFollow = itemView.findViewById(R.id.list_contentFollow);

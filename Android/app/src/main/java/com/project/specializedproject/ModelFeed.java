@@ -7,6 +7,8 @@ public class ModelFeed {
 
     private int fid;
     private String uid;
+    private String c_date;
+    private String u_date;
     private String feedW_distance;
     private String feedW_time;
 
@@ -31,9 +33,11 @@ public class ModelFeed {
     private String feedW_location3;
 
     public ModelFeed(){}
-    public ModelFeed(int fid, String uid, String feedW_distance, String feedW_time, String feedW_title0, String feedW_note0, String feedW_photo0, String feedW_location0, String feedW_title1, String feedW_note1, String feedW_photo1, String feedW_location1, String feedW_title2, String feedW_note2, String feedW_photo2, String feedW_location2, String feedW_title3, String feedW_note3, String feedW_photo3, String feedW_location3) {
+    public ModelFeed(int fid, String uid, String c_date, String u_date, String feedW_distance, String feedW_time, String feedW_title0, String feedW_note0, String feedW_photo0, String feedW_location0, String feedW_title1, String feedW_note1, String feedW_photo1, String feedW_location1, String feedW_title2, String feedW_note2, String feedW_photo2, String feedW_location2, String feedW_title3, String feedW_note3, String feedW_photo3, String feedW_location3) {
         this.fid = fid;
         this.uid = uid;
+        this.c_date = c_date;
+        this.u_date = u_date;
         this.feedW_distance = feedW_distance;
         this.feedW_time = feedW_time;
         this.feedW_title0 = feedW_title0;
@@ -65,6 +69,18 @@ public class ModelFeed {
     }
     public void setUid(String uid) {
         this.uid = uid;
+    }
+    public String getC_date() {
+        return c_date;
+    }
+    public void setC_date(String c_date) {
+        this.c_date = c_date;
+    }
+    public String getU_date() {
+        return u_date;
+    }
+    public void setU_date(String u_date) {
+        this.u_date = u_date;
     }
     public String getFeedW_distance() {
         return feedW_distance;

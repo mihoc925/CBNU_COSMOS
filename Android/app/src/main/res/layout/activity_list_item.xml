@@ -14,7 +14,7 @@
             android:scaleType="centerCrop"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="5"/>
+            android:layout_weight="7"/>
         <TextView
             android:id="@+id/list_nick"
             android:fontFamily="@font/binggrae_bold"
@@ -25,7 +25,14 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="35"/>
-
+        <TextView
+            android:id="@+id/list_date"
+            android:fontFamily="@font/binggrae"
+            android:textSize="10sp"
+            android:gravity="right|bottom"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="15"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"

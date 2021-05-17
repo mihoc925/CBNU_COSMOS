@@ -5,9 +5,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    android:layout_marginLeft="20dp"
-    android:layout_marginRight="20dp">
+    android:background="#FFFFFF">
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -145,7 +143,7 @@
                             android:layout_weight="70"
                             android:background="#00ffffff"
                             android:foregroundGravity="center"
-                            android:scaleType="centerCrop"
+                            android:scaleType="fitCenter"
                             android:src="@drawable/btn_plus_img" />
                     </LinearLayout>
 
@@ -202,7 +200,7 @@
                             android:layout_weight="70"
                             android:fontFamily="@font/roboto"
                             android:gravity="center|left"
-                            android:hint="예) 12.34 = 12.34 Km"
+                            android:hint="예) 1234 = 1.234 Km"
                             android:textColor="#000000"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -349,7 +347,7 @@
                             android:background="#00ffffff"
                             android:src="@drawable/btn_plus_img"
                             android:foregroundGravity="center"
-                            android:scaleType="centerCrop"
+                            android:scaleType="fitCenter"
                             android:layout_width="0dp"
                             android:layout_height="100dp"
                             android:layout_weight="70"/>
@@ -495,7 +493,7 @@
                             android:background="#00ffffff"
                             android:src="@drawable/btn_plus_img"
                             android:foregroundGravity="center"
-                            android:scaleType="centerCrop"
+                            android:scaleType="fitCenter"
                             android:layout_width="0dp"
                             android:layout_height="100dp"
                             android:layout_weight="70"/>
@@ -641,7 +639,7 @@
                             android:background="#00ffffff"
                             android:src="@drawable/btn_plus_img"
                             android:foregroundGravity="center"
-                            android:scaleType="centerCrop"
+                            android:scaleType="fitCenter"
                             android:layout_width="0dp"
                             android:layout_height="100dp"
                             android:layout_weight="70"/>
@@ -680,7 +678,7 @@
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:textColor="#000000"
-                    android:background="@drawable/round_edge10_btn_a70"
+                    android:background="@drawable/round_edge10_btn"
                     android:layout_marginLeft="100dp"
                     android:layout_marginRight="100dp"
                     android:layout_marginBottom="70dp"
