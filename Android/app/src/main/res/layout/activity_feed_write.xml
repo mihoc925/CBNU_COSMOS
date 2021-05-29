@@ -83,7 +83,7 @@
                             android:layout_weight="70"
                             android:fontFamily="@font/roboto"
                             android:gravity="center|left"
-                            android:hint="필수 입력"
+                            android:hint="메인 화면에 표시될 제목을 입력해 주세요."
                             android:textColor="#000000"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -111,7 +111,7 @@
                             android:layout_weight="70"
                             android:fontFamily="@font/roboto"
                             android:gravity="center|left"
-                            android:hint="필수 입력"
+                            android:hint="내용을 입력해 주세요."
                             android:inputType="textMultiLine"
                             android:lines="7"
                             android:maxLines="10"
@@ -352,6 +352,135 @@
                             android:layout_height="100dp"
                             android:layout_weight="70"/>
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/fd_mission1"
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:paddingTop="5dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="20"
+                            android:fontFamily="@font/roboto"
+                            android:gravity="center"
+                            android:text="달성 목표"
+                            android:textColor="#000000"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="70"
+                            android:orientation="vertical">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="10">
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="10"
+                                    android:fontFamily="@font/roboto"
+                                    android:gravity="center|left"
+                                    android:paddingLeft="10dp"
+                                    android:text="1순위"
+                                    android:textColor="@android:color/darker_gray"
+                                    android:textSize="12sp" />
+                                <TextView
+                                    android:id="@+id/fd_item11"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="30"
+                                    android:fontFamily="@font/roboto"
+                                    android:gravity="center|left"
+                                    android:textColor="#000000"
+                                    android:textSize="14sp" />
+                                <TextView
+                                    android:id="@+id/fd_item_value11"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="10"
+                                    android:fontFamily="@font/roboto"
+                                    android:gravity="center|right"
+                                    android:layout_marginRight="10dp"
+                                    android:textColor="#000000"
+                                    android:textSize="16sp" />
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="10">
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="10"
+                                    android:fontFamily="@font/roboto"
+                                    android:gravity="center|left"
+                                    android:paddingLeft="10dp"
+                                    android:text="2순위"
+                                    android:textColor="@android:color/darker_gray"
+                                    android:textSize="12sp" />
+                                <TextView
+                                    android:id="@+id/fd_item12"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="30"
+                                    android:fontFamily="@font/roboto"
+                                    android:gravity="center|left"
+                                    android:textColor="#000000"
+                                    android:textSize="14sp" />
+                                <TextView
+                                    android:id="@+id/fd_item_value12"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="10"
+                                    android:fontFamily="@font/roboto"
+                                    android:gravity="center|right"
+                                    android:layout_marginRight="10dp"
+                                    android:textColor="#000000"
+                                    android:textSize="16sp" />
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="10">
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="10"
+                                    android:fontFamily="@font/roboto"
+                                    android:gravity="center|left"
+                                    android:paddingLeft="10dp"
+                                    android:text="3순위"
+                                    android:textColor="@android:color/darker_gray"
+                                    android:textSize="12sp" />
+                                <TextView
+                                    android:id="@+id/fd_item13"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="30"
+                                    android:fontFamily="@font/roboto"
+                                    android:gravity="center|left"
+                                    android:textColor="#000000"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:id="@+id/fd_item_value13"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_weight="10"
+                                    android:fontFamily="@font/roboto"
+                                    android:gravity="center|right"
+                                    android:textColor="#000000"
+                                    android:textSize="16sp" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
@@ -498,6 +627,135 @@
                             android:layout_height="100dp"
                             android:layout_weight="70"/>
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/fd_mission2"
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:paddingTop="5dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="20"
+                            android:fontFamily="@font/roboto"
+                            android:gravity="center"
+                            android:text="달성 목표"
+                            android:textColor="#000000"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="70"
+                            android:orientation="vertical">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="10">
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="10"
+                                    android:fontFamily="@font/roboto"
+                                    android:gravity="center|left"
+                                    android:paddingLeft="10dp"
+                                    android:text="1순위"
+                                    android:textColor="@android:color/darker_gray"
+                                    android:textSize="12sp" />
+                                <TextView
+                                    android:id="@+id/fd_item21"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="30"
+                                    android:fontFamily="@font/roboto"
+                                    android:gravity="center|left"
+                                    android:textColor="#000000"
+                                    android:textSize="14sp" />
+                                <TextView
+                                    android:id="@+id/fd_item_value21"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="10"
+                                    android:fontFamily="@font/roboto"
+                                    android:gravity="center|right"
+                                    android:layout_marginRight="10dp"
+                                    android:textColor="#000000"
+                                    android:textSize="16sp" />
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="10">
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="10"
+                                    android:fontFamily="@font/roboto"
+                                    android:gravity="center|left"
+                                    android:paddingLeft="10dp"
+                                    android:text="2순위"
+                                    android:textColor="@android:color/darker_gray"
+                                    android:textSize="12sp" />
+                                <TextView
+                                    android:id="@+id/fd_item22"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="30"
+                                    android:fontFamily="@font/roboto"
+                                    android:gravity="center|left"
+                                    android:textColor="#000000"
+                                    android:textSize="14sp" />
+                                <TextView
+                                    android:id="@+id/fd_item_value22"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="10"
+                                    android:fontFamily="@font/roboto"
+                                    android:gravity="center|right"
+                                    android:layout_marginRight="10dp"
+                                    android:textColor="#000000"
+                                    android:textSize="16sp" />
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="10">
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="10"
+                                    android:fontFamily="@font/roboto"
+                                    android:gravity="center|left"
+                                    android:paddingLeft="10dp"
+                                    android:text="3순위"
+                                    android:textColor="@android:color/darker_gray"
+                                    android:textSize="12sp" />
+                                <TextView
+                                    android:id="@+id/fd_item23"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="30"
+                                    android:fontFamily="@font/roboto"
+                                    android:gravity="center|left"
+                                    android:textColor="#000000"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:id="@+id/fd_item_value23"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_weight="10"
+                                    android:fontFamily="@font/roboto"
+                                    android:gravity="center|right"
+                                    android:textColor="#000000"
+                                    android:textSize="16sp" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
@@ -644,6 +902,135 @@
                             android:layout_height="100dp"
                             android:layout_weight="70"/>
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/fd_mission3"
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:paddingTop="5dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="20"
+                            android:fontFamily="@font/roboto"
+                            android:gravity="center"
+                            android:text="달성 목표"
+                            android:textColor="#000000"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="70"
+                            android:orientation="vertical">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="10">
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="10"
+                                    android:fontFamily="@font/roboto"
+                                    android:gravity="center|left"
+                                    android:paddingLeft="10dp"
+                                    android:text="1순위"
+                                    android:textColor="@android:color/darker_gray"
+                                    android:textSize="12sp" />
+                                <TextView
+                                    android:id="@+id/fd_item31"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="30"
+                                    android:fontFamily="@font/roboto"
+                                    android:gravity="center|left"
+                                    android:textColor="#000000"
+                                    android:textSize="14sp" />
+                                <TextView
+                                    android:id="@+id/fd_item_value31"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="10"
+                                    android:fontFamily="@font/roboto"
+                                    android:gravity="center|right"
+                                    android:layout_marginRight="10dp"
+                                    android:textColor="#000000"
+                                    android:textSize="16sp" />
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="10">
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="10"
+                                    android:fontFamily="@font/roboto"
+                                    android:gravity="center|left"
+                                    android:paddingLeft="10dp"
+                                    android:text="2순위"
+                                    android:textColor="@android:color/darker_gray"
+                                    android:textSize="12sp" />
+                                <TextView
+                                    android:id="@+id/fd_item32"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="30"
+                                    android:fontFamily="@font/roboto"
+                                    android:gravity="center|left"
+                                    android:textColor="#000000"
+                                    android:textSize="14sp" />
+                                <TextView
+                                    android:id="@+id/fd_item_value32"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="10"
+                                    android:fontFamily="@font/roboto"
+                                    android:gravity="center|right"
+                                    android:layout_marginRight="10dp"
+                                    android:textColor="#000000"
+                                    android:textSize="16sp" />
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="10">
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="10"
+                                    android:fontFamily="@font/roboto"
+                                    android:gravity="center|left"
+                                    android:paddingLeft="10dp"
+                                    android:text="3순위"
+                                    android:textColor="@android:color/darker_gray"
+                                    android:textSize="12sp" />
+                                <TextView
+                                    android:id="@+id/fd_item33"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="30"
+                                    android:fontFamily="@font/roboto"
+                                    android:gravity="center|left"
+                                    android:textColor="#000000"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:id="@+id/fd_item_value33"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_weight="10"
+                                    android:fontFamily="@font/roboto"
+                                    android:gravity="center|right"
+                                    android:textColor="#000000"
+                                    android:textSize="16sp" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
@@ -684,6 +1071,7 @@
                     android:layout_marginBottom="70dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
+
             </LinearLayout>
 
         </ScrollView>

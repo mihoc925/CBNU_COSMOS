@@ -1,67 +1,50 @@
 package com.project.specializedproject;
 
-import java.util.HashMap;
-import java.util.Map;
+import android.app.Application;
 
-public class ModelFeed {
+public class ModelFeed extends Application {
 
-    private int fid;
+    private String fid;
     private String uid;
     private String c_date;
     private String u_date;
     private String feedW_distance;
     private String feedW_time;
+    private String feedW_count;
 
     private String feedW_title0;
     private String feedW_note0;
     private String feedW_photo0;
     private String feedW_location0;
 
-    private String feedW_title1;
-    private String feedW_note1;
-    private String feedW_photo1;
-    private String feedW_location1;
-
-    private String feedW_title2;
-    private String feedW_note2;
-    private String feedW_photo2;
-    private String feedW_location2;
-
-    private String feedW_title3;
-    private String feedW_note3;
-    private String feedW_photo3;
-    private String feedW_location3;
+    private String feedW_title;
+    private String feedW_note;
+    private String feedW_photo;
+    private String feedW_location;
 
     public ModelFeed(){}
-    public ModelFeed(int fid, String uid, String c_date, String u_date, String feedW_distance, String feedW_time, String feedW_title0, String feedW_note0, String feedW_photo0, String feedW_location0, String feedW_title1, String feedW_note1, String feedW_photo1, String feedW_location1, String feedW_title2, String feedW_note2, String feedW_photo2, String feedW_location2, String feedW_title3, String feedW_note3, String feedW_photo3, String feedW_location3) {
+    public ModelFeed(String fid, String uid, String c_date, String u_date, String feedW_distance, String feedW_time, String feedW_count, String feedW_title0, String feedW_note0, String feedW_photo0, String feedW_location0, String feedW_title, String feedW_note, String feedW_photo, String feedW_location) {
         this.fid = fid;
         this.uid = uid;
         this.c_date = c_date;
         this.u_date = u_date;
         this.feedW_distance = feedW_distance;
         this.feedW_time = feedW_time;
+        this.feedW_count = feedW_count;
         this.feedW_title0 = feedW_title0;
         this.feedW_note0 = feedW_note0;
         this.feedW_photo0 = feedW_photo0;
         this.feedW_location0 = feedW_location0;
-        this.feedW_title1 = feedW_title1;
-        this.feedW_note1 = feedW_note1;
-        this.feedW_photo1 = feedW_photo1;
-        this.feedW_location1 = feedW_location1;
-        this.feedW_title2 = feedW_title2;
-        this.feedW_note2 = feedW_note2;
-        this.feedW_photo2 = feedW_photo2;
-        this.feedW_location2 = feedW_location2;
-        this.feedW_title3 = feedW_title3;
-        this.feedW_note3 = feedW_note3;
-        this.feedW_photo3 = feedW_photo3;
-        this.feedW_location3 = feedW_location3;
+        this.feedW_title = feedW_title;
+        this.feedW_note = feedW_note;
+        this.feedW_photo = feedW_photo;
+        this.feedW_location = feedW_location;
     }
 
-    public Integer getFid() {
+    public String getFid() {
         return fid;
     }
-    public void setFid(int fid) {
+    public void setFid(String fid) {
         this.fid = fid;
     }
     public String getUid() {
@@ -94,6 +77,12 @@ public class ModelFeed {
     public void setFeedW_time(String feedW_time) {
         this.feedW_time = feedW_time;
     }
+    public String getFeedW_count() {
+        return feedW_count;
+    }
+    public void setFeedW_count(String feedW_count) {
+        this.feedW_count = feedW_count;
+    }
     public String getFeedW_title0() {
         return feedW_title0;
     }
@@ -118,76 +107,28 @@ public class ModelFeed {
     public void setFeedW_location0(String feedW_location0) {
         this.feedW_location0 = feedW_location0;
     }
-    public String getFeedW_title1() {
-        return feedW_title1;
+    public String getFeedW_title() {
+        return feedW_title;
     }
-    public void setFeedW_title1(String feedW_title1) {
-        this.feedW_title1 = feedW_title1;
+    public void setFeedW_title(String feedW_title) {
+        this.feedW_title = feedW_title;
     }
-    public String getFeedW_note1() {
-        return feedW_note1;
+    public String getFeedW_note() {
+        return feedW_note;
     }
-    public void setFeedW_note1(String feedW_note1) {
-        this.feedW_note1 = feedW_note1;
+    public void setFeedW_note(String feedW_note) {
+        this.feedW_note = feedW_note;
     }
-    public String getFeedW_photo1() {
-        return feedW_photo1;
+    public String getFeedW_photo() {
+        return feedW_photo;
     }
-    public void setFeedW_photo1(String feedW_photo1) {
-        this.feedW_photo1 = feedW_photo1;
+    public void setFeedW_photo(String feedW_photo) {
+        this.feedW_photo = feedW_photo;
     }
-    public String getFeedW_location1() {
-        return feedW_location1;
+    public String getFeedW_location() {
+        return feedW_location;
     }
-    public void setFeedW_location1(String feedW_location1) {
-        this.feedW_location1 = feedW_location1;
-    }
-    public String getFeedW_title2() {
-        return feedW_title2;
-    }
-    public void setFeedW_title2(String feedW_title2) {
-        this.feedW_title2 = feedW_title2;
-    }
-    public String getFeedW_note2() {
-        return feedW_note2;
-    }
-    public void setFeedW_note2(String feedW_note2) {
-        this.feedW_note2 = feedW_note2;
-    }
-    public String getFeedW_photo2() {
-        return feedW_photo2;
-    }
-    public void setFeedW_photo2(String feedW_photo2) {
-        this.feedW_photo2 = feedW_photo2;
-    }
-    public String getFeedW_location2() {
-        return feedW_location2;
-    }
-    public void setFeedW_location2(String feedW_location2) {
-        this.feedW_location2 = feedW_location2;
-    }
-    public String getFeedW_title3() {
-        return feedW_title3;
-    }
-    public void setFeedW_title3(String feedW_title3) {
-        this.feedW_title3 = feedW_title3;
-    }
-    public String getFeedW_note3() {
-        return feedW_note3;
-    }
-    public void setFeedW_note3(String feedW_note3) {
-        this.feedW_note3 = feedW_note3;
-    }
-    public String getFeedW_photo3() {
-        return feedW_photo3;
-    }
-    public void setFeedW_photo3(String feedW_photo3) {
-        this.feedW_photo3 = feedW_photo3;
-    }
-    public String getFeedW_location3() {
-        return feedW_location3;
-    }
-    public void setFeedW_location3(String feedW_location3) {
-        this.feedW_location3 = feedW_location3;
+    public void setFeedW_location(String feedW_location) {
+        this.feedW_location = feedW_location;
     }
 }

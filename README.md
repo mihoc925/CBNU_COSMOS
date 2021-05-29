@@ -6,22 +6,31 @@
 ---
 ### Updates
 Note
-* ## Connecting Default page
+* ## Adding Machine Learning function
 
-- Add login & register Page
-- Add/Connect Feed Page
-- Add/Connect User Page
+- Image classification model (exam)
+- Mission function
+- Add ect Pages.
 
 ### Features
-- tools: Android Studio
-- platform & Library: Firebase, Tensorflow, SQLite (plan)
+- tools :: Android Studio (Java)
+- platform & Library :: Firebase, Tensorflow
 - ## open source
 ```
 1) https://github.com/oneHamidreza/MeowBottomNavigation
-2. ..
+2) https://github.com/zhanghai/MaterialRatingBar
+3) https://github.com/tensorflow/examples
+4) https://github.com/bumptech/glide
+5) https://github.com/square/picasso //
+6) https://github.com/hdodenhof/CircleImageView //
 ```
 ---
 # Preview Image
+
+![ml](https://user-images.githubusercontent.com/63622578/120056693-ec6b5e00-c078-11eb-8bd4-3b24f902b03c.png)
+
+---
+
 ![cosmos1](https://user-images.githubusercontent.com/63622578/117752922-99a93e00-b252-11eb-85d8-cd6af85f065f.png)
 
 ---

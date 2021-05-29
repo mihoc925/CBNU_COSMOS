@@ -1,18 +1,18 @@
 package com.project.specializedproject;
 
 import android.content.Context;
-import android.util.Log;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,8 +28,6 @@ public class FragListAdapter extends RecyclerView.Adapter<FragListAdapter.ViewHo
     private String TAG = "FragListAdapter";
     private List<ModelFeed> mFeed;
     private Context mContext;
-
-    int contentCount;
 
     public FragListAdapter(ArrayList<ModelFeed> feed, Context context) {
         this.mFeed = feed;
@@ -53,7 +51,9 @@ public class FragListAdapter extends RecyclerView.Adapter<FragListAdapter.ViewHo
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ModelUser user = dataSnapshot.getValue(ModelUser.class);
-                Glide.with(mContext).load(user.getProfileImg()).into(holder.list_profileImg);
+                try {
+                    Glide.with(mContext).load(user.getProfileImg()).into(holder.list_profileImg);
+                }catch (Exception e){}
                 holder.list_nick.setText(user.getNick());
             }
             @Override
@@ -63,22 +63,25 @@ public class FragListAdapter extends RecyclerView.Adapter<FragListAdapter.ViewHo
 
         holder.list_title.setText(mFeed.get(position).getFeedW_title0());
         holder.list_note.setText(mFeed.get(position).getFeedW_note0());
-
-
-//        Log.e(TAG, "date = "+mFeed.get(position).getC_date());
-//        holder.list_date.setText(mFeed.get(position).getC_date());
         holder.list_date.setText(viewDate(mFeed.get(position).getC_date(), mFeed.get(position).getU_date()));
-
-
         Glide.with(mContext).load(mFeed.get(position).getFeedW_photo0()).into(holder.list_photo);
 //        holder.list_reply.setText(mFeed.get(position).getReply());
 
-        contentCounting(position);
-        holder.list_contentCount.setText(String.valueOf(contentCount));
+        holder.list_contentCount.setText(mFeed.get(position).getFeedW_count());
 //        holder.list_contentFollow.setText(mFeed.get(position).getContentFollow());
 //        holder.list_contentCompletion.setText(mFeed.get(position).getContentCompletion());
         holder.list_contentDistance.setText(contentDistance_Cal(mFeed.get(position).getFeedW_distance()));
         holder.list_contentTime.setText(contentTime_Cal(mFeed.get(position).getFeedW_time()));
+
+        holder.list_linear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, FeedDetail.class);
+                intent.putExtra("fid",  mFeed.get(position).getFid());
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     private String viewDate(String cdate, String udate){
@@ -105,16 +108,6 @@ public class FragListAdapter extends RecyclerView.Adapter<FragListAdapter.ViewHo
             outputDate = strUdate[0] + "." + strUdate[1] + "." + strUdate[2];
 
         return outputDate;
-    }
-
-    private void contentCounting(int position){
-        contentCount = 0;
-        if(mFeed.get(position).getFeedW_title1() != null && !mFeed.get(position).getFeedW_title1().equals(""))
-            contentCount = 1;
-        if(mFeed.get(position).getFeedW_title2() != null && !mFeed.get(position).getFeedW_title2().equals(""))
-            contentCount = 2;
-        if(mFeed.get(position).getFeedW_title3() != null && !mFeed.get(position).getFeedW_title3().equals(""))
-            contentCount = 3;
     }
 
     private String contentDistance_Cal(String x){
@@ -151,6 +144,8 @@ public class FragListAdapter extends RecyclerView.Adapter<FragListAdapter.ViewHo
                 list_contentCount, list_contentFollow, list_contentCompletion,
                 list_contentDistance, list_contentTime;
 
+        LinearLayout list_linear;
+
         ViewHolder(View itemView) {
             super(itemView);
             list_profileImg = itemView.findViewById(R.id.list_profileImg);
@@ -167,18 +162,7 @@ public class FragListAdapter extends RecyclerView.Adapter<FragListAdapter.ViewHo
             list_contentDistance = itemView.findViewById(R.id.list_contentDistance);
             list_contentTime = itemView.findViewById(R.id.list_contentTime);
 
-            // 리싸이클러뷰 아이템 클릭 이벤트
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int pos = getAdapterPosition() ;
-                    if (pos != RecyclerView.NO_POSITION) {
-
-//                        notifyItemChanged(pos); // 해당 포지션 뷰 업데이트
-                    }
-                }
-            });
-
+            list_linear = itemView.findViewById(R.id.list_linear);
         }
     }
 }

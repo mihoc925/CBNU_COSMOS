@@ -1,13 +1,10 @@
 package com.project.specializedproject;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -18,44 +15,36 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Query;
-import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
-import com.google.firebase.storage.UploadTask;
-import com.squareup.picasso.Picasso;
 
-import org.json.JSONObject;
-
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 import java.util.regex.Pattern;
 
 public class FeedWrite extends AppCompatActivity {
     private String TAG = "FeedWrite";
     ProgressDialog pd;
+    public static Context feedW_Context;
 
     LinearLayout feedW_layout0, feedW_layout1, feedW_layout2, feedW_layout3;
     TextView feedW_title0, feedW_title1, feedW_title2, feedW_title3;
@@ -68,6 +57,15 @@ public class FeedWrite extends AppCompatActivity {
     ImageButton feedW_plusBtn, feedW_minusBtn;
     Button feedW_submit;
 
+    // 도전과제
+    LinearLayout fd_mission1, fd_mission2, fd_mission3, fd_mission4, fd_mission5;
+    TextView fd_item11, fd_item12, fd_item13,
+            fd_item21, fd_item22, fd_item23,
+            fd_item31, fd_item32, fd_item33;
+    TextView fd_item_value11, fd_item_value12, fd_item_value13,
+            fd_item_value21, fd_item_value22, fd_item_value23,
+            fd_item_value31, fd_item_value32, fd_item_value33;
+
     int stateNum = 0; // 레이아웃 추가, 삭제
     int fid = 0; // auto_increment
 
@@ -78,11 +76,15 @@ public class FeedWrite extends AppCompatActivity {
     int photoNum; // 버튼) 해당 이미지 번호
     int proceedMaxNum[] = new int[2]; // Task 검증 :: 0= for, 1= Task
 
+    // 도전과제 등록
+    boolean bPhoto0 = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed_write);
         setView();
+        feedW_Context = this;
     }
 
     public void onClick(View view){
@@ -97,25 +99,45 @@ public class FeedWrite extends AppCompatActivity {
             photoNum = 0;
             gallery();
         }else if(view.getId() == R.id. feedW_photo1){
-            photoNum = 1;
-            gallery();
+            if(bPhoto0 == false){
+                Intent intent = new Intent(this, ClassifierActivity.class);
+                intent.putExtra("state",  "write");
+                intent.putExtra("content",  1);
+                startActivity(intent);
+                bPhoto0 = true;
+            }else{
+                photoNum = 1;
+                gallery();
+                bPhoto0 = false;
+            }
         }else if(view.getId() == R.id. feedW_photo2){
-            photoNum = 2;
-            gallery();
+            if(bPhoto0 == false){
+                Intent intent = new Intent(this, ClassifierActivity.class);
+                intent.putExtra("state",  "write");
+                intent.putExtra("content",  2);
+                startActivity(intent);
+                bPhoto0 = true;
+            }else{
+                photoNum = 2;
+                gallery();
+                bPhoto0 = false;
+            }
         }else if(view.getId() == R.id. feedW_photo3){
-            photoNum = 3;
-            gallery();
+            if(bPhoto0 == false){
+                Intent intent = new Intent(this, ClassifierActivity.class);
+                intent.putExtra("state",  "write");
+                intent.putExtra("content",  3);
+                startActivity(intent);
+                bPhoto0 = true;
+            }else{
+                photoNum = 3;
+                gallery();
+                bPhoto0 = false;
+            }
         }
     }
 
     private void form_validation(){
-        if(feedW_layout1.getVisibility() == View.VISIBLE)
-            layoutNum = 1;
-        if(feedW_layout2.getVisibility() == View.VISIBLE)
-            layoutNum = 2;
-        if (feedW_layout3.getVisibility() == View.VISIBLE)
-            layoutNum = 3;
-
         boolean isValidation = true;
 
         if (TextUtils.isEmpty(feedW_title0.getText().toString())) {
@@ -141,24 +163,57 @@ public class FeedWrite extends AppCompatActivity {
             isValidation = false;
         }
 
+        if(feedW_layout1.getVisibility() == View.VISIBLE) {
+            layoutNum = 1;
+            if (TextUtils.isEmpty(feedW_title1.getText().toString())) {
+                feedW_title1.setError("제목을 입력해 주세요.");
+                isValidation = false;
+            }
+        }
+        if(feedW_layout2.getVisibility() == View.VISIBLE) {
+            layoutNum = 2;
+            if (TextUtils.isEmpty(feedW_title2.getText().toString())) {
+                feedW_title2.setError("제목을 입력해 주세요.");
+                isValidation = false;
+            }
+        }
+        if (feedW_layout3.getVisibility() == View.VISIBLE) {
+            layoutNum = 3;
+            if (TextUtils.isEmpty(feedW_title3.getText().toString())) {
+                feedW_title3.setError("제목을 입력해 주세요.");
+                isValidation = false;
+            }
+        }
+
         if(isValidation == true){
             createFid();
         }
     }
+
+    ArrayList<Integer> fidNumArr = new ArrayList<Integer>();
 
     private void createFid(){
         pd = new ProgressDialog(FeedWrite.this);
         pd.setMessage("잠시만 기다려주세요");
         pd.show();
 
-        Query searchData = FirebaseDatabase.getInstance().getReference("Feed").orderByChild("fid").limitToLast(1);
+        // limitToLast = integer not recognized (1~10 => 9)
+        Query searchData = FirebaseDatabase.getInstance().getReference("Feed").orderByChild("fid");
         searchData.addListenerForSingleValueEvent(new ValueEventListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists() && dataSnapshot.getChildrenCount() > 0){
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        fid = Integer.parseInt(snapshot.getKey()) + 1;
+                        fidNumArr.add(Integer.parseInt(snapshot.getKey()));
                     }
+                }
+
+                if(fidNumArr.isEmpty()) {
+                    fid = 0;
+                }else {
+                    fidNumArr.sort((o1, o2) -> o2.compareTo(o1));
+                    fid = (fidNumArr.get(0) + 1);
                 }
                 upload_Image();
             }
@@ -226,7 +281,7 @@ public class FeedWrite extends AppCompatActivity {
         SimpleDateFormat sdf= new SimpleDateFormat("yyyy/MM/dd_hh:mm:ss");
 
         HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("fid", fid);
+        hashMap.put("fid", "" + fid);
         hashMap.put("uid", fAuth.getCurrentUser().getUid());
         hashMap.put("c_date", sdf.format(new Date()));
         hashMap.put("u_date", sdf.format(new Date()));
@@ -236,28 +291,41 @@ public class FeedWrite extends AppCompatActivity {
         hashMap.put("feedW_location0", feedW_location0.getText().toString());
         hashMap.put("feedW_distance", feedW_distance.getText().toString());
         hashMap.put("feedW_time", feedW_time.getText().toString());
-
-        Log.e(TAG, "------------------------layoutNum = "+layoutNum);
-        Log.e(TAG, "photo 0 = "+photo[0]);
-        Log.e(TAG, "photo 1 = "+photo[1]);
-        Log.e(TAG, "photo 2 = "+photo[2]);
-        Log.e(TAG, "photo 3 = "+photo[3]);
+        hashMap.put("feedW_count", "" + layoutNum);
 
         if(layoutNum >= 1){
             hashMap.put("feedW_title1", feedW_title1.getText().toString());
             hashMap.put("feedW_note1", feedW_note1.getText().toString());
             hashMap.put("feedW_photo1", photo[1]);
             hashMap.put("feedW_location1", feedW_location1.getText().toString());
+            hashMap.put("fd_item11", fd_item11.getText().toString());
+            hashMap.put("fd_item12", fd_item12.getText().toString());
+            hashMap.put("fd_item13", fd_item13.getText().toString());
+            hashMap.put("fd_item_value11", fd_item_value11.getText().toString());
+            hashMap.put("fd_item_value12", fd_item_value12.getText().toString());
+            hashMap.put("fd_item_value13", fd_item_value13.getText().toString());
             if(layoutNum >= 2){
                 hashMap.put("feedW_title2", feedW_title2.getText().toString());
                 hashMap.put("feedW_note2", feedW_note2.getText().toString());
                 hashMap.put("feedW_photo2", photo[2]);
                 hashMap.put("feedW_location2", feedW_location2.getText().toString());
+                hashMap.put("fd_item21", fd_item21.getText().toString());
+                hashMap.put("fd_item22", fd_item22.getText().toString());
+                hashMap.put("fd_item23", fd_item23.getText().toString());
+                hashMap.put("fd_item_value21", fd_item_value21.getText().toString());
+                hashMap.put("fd_item_value22", fd_item_value22.getText().toString());
+                hashMap.put("fd_item_value23", fd_item_value23.getText().toString());
                 if(layoutNum >= 3){
                     hashMap.put("feedW_title3", feedW_title3.getText().toString());
                     hashMap.put("feedW_note3", feedW_note3.getText().toString());
                     hashMap.put("feedW_photo3", photo[3]);
                     hashMap.put("feedW_location3", feedW_location3.getText().toString());
+                    hashMap.put("fd_item31", fd_item31.getText().toString());
+                    hashMap.put("fd_item32", fd_item32.getText().toString());
+                    hashMap.put("fd_item33", fd_item33.getText().toString());
+                    hashMap.put("fd_item_value31", fd_item_value31.getText().toString());
+                    hashMap.put("fd_item_value32", fd_item_value32.getText().toString());
+                    hashMap.put("fd_item_value33", fd_item_value33.getText().toString());
                 }
             }
         }
@@ -390,5 +458,30 @@ public class FeedWrite extends AppCompatActivity {
 
         feedW_submit = findViewById(R.id.feedW_submit);
         feedW_submit.setOnClickListener(this::onClick);
+
+        fd_mission1 = findViewById(R.id.fd_mission1);
+        fd_mission2 = findViewById(R.id.fd_mission2);
+        fd_mission3 = findViewById(R.id.fd_mission3);
+
+        fd_item11 = findViewById(R.id.fd_item11);
+        fd_item12 = findViewById(R.id.fd_item12);
+        fd_item13 = findViewById(R.id.fd_item13);
+        fd_item_value11 = findViewById(R.id.fd_item_value11);
+        fd_item_value12 = findViewById(R.id.fd_item_value12);
+        fd_item_value13 = findViewById(R.id.fd_item_value13);
+
+        fd_item21 = findViewById(R.id.fd_item21);
+        fd_item22 = findViewById(R.id.fd_item22);
+        fd_item23 = findViewById(R.id.fd_item23);
+        fd_item_value21 = findViewById(R.id.fd_item_value21);
+        fd_item_value22 = findViewById(R.id.fd_item_value22);
+        fd_item_value23 = findViewById(R.id.fd_item_value23);
+
+        fd_item31 = findViewById(R.id.fd_item31);
+        fd_item32 = findViewById(R.id.fd_item32);
+        fd_item33 = findViewById(R.id.fd_item33);
+        fd_item_value31 = findViewById(R.id.fd_item_value31);
+        fd_item_value32 = findViewById(R.id.fd_item_value32);
+        fd_item_value33 = findViewById(R.id.fd_item_value33);
     }
 }

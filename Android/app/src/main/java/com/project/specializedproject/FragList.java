@@ -21,19 +21,18 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Query;
-import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Iterator;
+import java.util.Map;
 
 public class FragList extends Fragment {
     private String TAG = "FragList";
@@ -42,8 +41,11 @@ public class FragList extends Fragment {
     FragListAdapter listAdapter;
     FragListGuideAdapter listGuideAdapter;
 
-    ArrayList<ModelFeed> mFeed = new ArrayList<>();
     ArrayList<ModelUser> mUser = new ArrayList<>();
+    ArrayList<ModelFeed> mFeed = new ArrayList<>();
+    String[][] fArray = new String[1000][11];
+    int fArrayNum = 0;
+
     String userPermission;
 
     LinearLayout list_locationLayout;
@@ -63,7 +65,8 @@ public class FragList extends Fragment {
 
         searchMyProfile();
         searchUser();
-        Comparator comparator = Comparator.comparing(ModelFeed::getFid, (o1, o2) -> o2.compareTo(o1));
+
+        Comparator comparator = Comparator.comparing(  ModelFeed::getC_date, (o1, o2) -> o2.compareTo(o1));
         searchFeed(comparator);
 
         rList.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
@@ -82,11 +85,34 @@ public class FragList extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 mFeed.clear();
+                fArrayNum = 0;
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    ModelFeed feed = snapshot.getValue(ModelFeed.class);
-                    mFeed.add(feed);
+                    if (snapshot.exists() && snapshot.getChildrenCount() > 0) {
+                        Map map = (Map) snapshot.getValue();
+                        Iterator<String> Iterator = map.keySet().iterator();
+                        while (Iterator.hasNext()) {
+                            String next = Iterator.next();
+
+                            fArray[fArrayNum][0] = (String) map.get("fid");
+                            fArray[fArrayNum][1] = (String) map.get("uid");
+                            fArray[fArrayNum][2] = (String) map.get("c_date");
+                            fArray[fArrayNum][3] = (String) map.get("u_date");
+                            fArray[fArrayNum][4] = (String) map.get("feedW_distance");
+                            fArray[fArrayNum][5] = (String) map.get("feedW_time");
+                            fArray[fArrayNum][6] = (String) map.get("feedW_count");
+
+                            fArray[fArrayNum][7] = (String) map.get("feedW_title0");
+                            fArray[fArrayNum][8] = (String) map.get("feedW_note0");
+                            fArray[fArrayNum][9] = (String) map.get("feedW_photo0");
+                            fArray[fArrayNum][10] = (String) map.get("feedW_location0");
+                        }
+                        fArrayNum++;
+                    }
                 }
+
+                for (int i = 0; i < fArrayNum; i++)
+                    addItem(i);
 
                 mFeed.sort(comparator);
                 listAdapter.notifyDataSetChanged();
@@ -96,6 +122,23 @@ public class FragList extends Fragment {
             public void onCancelled(DatabaseError databaseError) {
             }
         });
+    }
+
+    private void addItem(int i) {
+        ModelFeed mf = new ModelFeed();
+        mf.setFid(fArray[i][0]);
+        mf.setUid(fArray[i][1]);
+        mf.setC_date(fArray[i][2]);
+        mf.setU_date(fArray[i][3]);
+        mf.setFeedW_distance(fArray[i][4]);
+        mf.setFeedW_time(fArray[i][5]);
+        mf.setFeedW_count(fArray[i][6]);
+
+        mf.setFeedW_title0(fArray[i][7]);
+        mf.setFeedW_note0(fArray[i][8]);
+        mf.setFeedW_photo0(fArray[i][9]);
+        mf.setFeedW_location0(fArray[i][10]);
+        mFeed.add(mf);
     }
 
     private void searchUser() {
@@ -216,7 +259,7 @@ public class FragList extends Fragment {
                 Toast.makeText(mContext, "가이드가 아닙니다.",Toast.LENGTH_SHORT).show();
             }
         }else if(view.getId() == R.id.list_guide_listBtn){
-            Toast.makeText(mContext, "미구현입니다.",Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(mContext, GuideList.class));
         }
     }
 }

@@ -12,7 +12,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="7"
+            android:layout_weight="5"
             android:background="@drawable/layout_shadow">
             <LinearLayout
                 android:id="@+id/list_locationLayout"
@@ -72,51 +72,6 @@
                 android:layout_weight="10"/>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="20"
-            android:orientation="vertical">
-            <LinearLayout
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="10">
-                <TextView
-                    android:text="가이드 목록"
-                    android:fontFamily="@font/roboto"
-                    android:textStyle="bold"
-                    android:textSize="14sp"
-                    android:textColor="#000000"
-                    android:gravity="left|center"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="50"/>
-                <Button
-                    android:id="@+id/list_guide_listBtn"
-                    android:text="모두보기"
-                    android:fontFamily="@font/roboto"
-                    android:textStyle="bold"
-                    android:textSize="12sp"
-                    android:textColor="#9C9C9C"
-                    android:gravity="right|center"
-                    android:background="#00ffffff"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="10"/>
-            </LinearLayout>
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_GuideList"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="30"/>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="#BDBDBD"/>
-        </LinearLayout>
-
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -126,11 +81,61 @@
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerList"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="100dp" />
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="10">
+                            <TextView
+                                android:text="가이드 목록"
+                                android:fontFamily="@font/roboto"
+                                android:textStyle="bold"
+                                android:textSize="14sp"
+                                android:textColor="#000000"
+                                android:gravity="left|center"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="50"/>
+                            <Button
+                                android:id="@+id/list_guide_listBtn"
+                                android:text="모두보기"
+                                android:fontFamily="@font/roboto"
+                                android:textStyle="bold"
+                                android:textSize="12sp"
+                                android:textColor="#9C9C9C"
+                                android:gravity="right|center"
+                                android:background="#00ffffff"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="10"/>
+                        </LinearLayout>
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recycler_GuideList"
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"/>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="#BDBDBD"/>
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerList"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="100dp" />
+
+                </LinearLayout>
             </ScrollView>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>

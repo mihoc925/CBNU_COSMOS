@@ -8,7 +8,9 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application
         android:allowBackup="true"
@@ -17,9 +19,12 @@
         android:roundIcon="@mipmap/ic_cosmos"
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents.Light.NoActionBar.Bridge">
-        <activity android:name=".Dialog_Filter"></activity>
-        <activity android:name=".FragListGuideAdapter" />
-        <activity android:name=".Dialog_Guide_Signup" />
+        <activity android:name=".Mission"></activity>
+        <activity android:name=".GuideList" />
+        <activity android:name=".FeedDetail" />
+        <activity
+            android:name=".ClassifierActivity"
+            android:screenOrientation="portrait" />
         <activity android:name=".FeedWrite" />
         <activity android:name=".MainActivity" />
         <activity android:name=".AccountRegit" />
@@ -30,6 +35,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBXYVDKhC7D8Gi5L2IYDOd09yXOKcybQpY" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/filepaths" />
+        </provider>
     </application>
 
 </manifest>

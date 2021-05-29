@@ -1,2 +1,2 @@
-include ':app'
 rootProject.name = "SpecializedProject"
+include ':app', ':lib_support', ':lib_task_api', ':models'
