@@ -45,6 +45,7 @@ public class FeedWrite extends AppCompatActivity {
     private String TAG = "FeedWrite";
     ProgressDialog pd;
     public static Context feedW_Context;
+    FeedWriteLocation feedWriteLocation;
 
     LinearLayout feedW_layout0, feedW_layout1, feedW_layout2, feedW_layout3;
     TextView feedW_title0, feedW_title1, feedW_title2, feedW_title3;
@@ -79,6 +80,7 @@ public class FeedWrite extends AppCompatActivity {
     // 도전과제 등록
     boolean bPhoto0 = false;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,7 +97,7 @@ public class FeedWrite extends AppCompatActivity {
         }else if(view.getId() == R.id.feedW_submit){
             // TODO (진행 순서) 1.validation >> 2.search_fid >> 3.upload_Image >> 4.upload_Proceed >> 5.submit
             form_validation();
-        }else if(view.getId() == R.id. feedW_photo0){
+        }else if(view.getId() == R.id. feedW_photo0){ // -- default Photo
             photoNum = 0;
             gallery();
         }else if(view.getId() == R.id. feedW_photo1){
@@ -134,6 +136,17 @@ public class FeedWrite extends AppCompatActivity {
                 gallery();
                 bPhoto0 = false;
             }
+        }else if(view.getId() == R.id.feedW_location0){ // -- default Location
+            Intent intent = new Intent(this, FeedWriteLocation.class);
+//            intent.putExtra("fid",  fid); // 피드 번호
+            intent.putExtra("content",  0); // 도전과제 번호
+            startActivity(intent);
+        }else if(view.getId() == R.id.feedW_location1){
+
+        }else if(view.getId() == R.id.feedW_location2){
+
+        }else if(view.getId() == R.id.feedW_location3){
+
         }
     }
 

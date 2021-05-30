@@ -4,15 +4,18 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
+import com.pedro.library.AutoPermissions;
+import com.pedro.library.AutoPermissionsListener;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AutoPermissionsListener {
     private String TAG = "MainActivity";
 
     private final static int ID_list = 1;
@@ -32,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         setPermission(); // 퍼미션 설정
+        AutoPermissions.Companion.loadAllPermissions(this, 100);
         setBottomNavigation();
     }
 
@@ -102,5 +106,20 @@ public class MainActivity extends AppCompatActivity {
         });
 
 //        Bottomnavigation.show(1,true); // 기본 홈으로 설정
+    }
+
+    // Location permission
+    @Override
+    public void onDenied(int i, String[] strings) {
+    }
+
+    @Override
+    public void onGranted(int i, String[] strings) {
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        AutoPermissions.Companion.parsePermissions(this, requestCode, permissions, this);
     }
 }

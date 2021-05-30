@@ -93,4 +93,5 @@ dependencies {
 
     implementation 'me.zhanghai.android.materialratingbar:library:1.4.0' // RatingBar
     implementation 'com.google.android.gms:play-services-maps:17.0.0' // Google Map
+    implementation 'com.github.pedroSG94:AutoPermissions:1.0.3' // auto Permissions
 }
