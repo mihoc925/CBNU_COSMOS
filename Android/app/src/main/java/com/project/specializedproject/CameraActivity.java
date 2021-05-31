@@ -1028,6 +1028,22 @@ public abstract class CameraActivity extends AppCompatActivity
           ((FeedWrite) FeedWrite.feedW_Context).fd_item_value31.setText(String.format("%.2f", (maxFlo0 / adjustmentValue)) + "%");
           ((FeedWrite) FeedWrite.feedW_Context).fd_item_value32.setText(String.format("%.2f", (maxFlo1 / adjustmentValue)) + "%");
           ((FeedWrite) FeedWrite.feedW_Context).fd_item_value33.setText(String.format("%.2f", (maxFlo2 / adjustmentValue)) + "%");
+        }else if(content == 4) {
+          ((FeedWrite) FeedWrite.feedW_Context).fd_mission4.setVisibility(View.VISIBLE);
+          ((FeedWrite) FeedWrite.feedW_Context).fd_item41.setText(maxTxt0);
+          ((FeedWrite) FeedWrite.feedW_Context).fd_item42.setText(maxTxt1);
+          ((FeedWrite) FeedWrite.feedW_Context).fd_item43.setText(maxTxt2);
+          ((FeedWrite) FeedWrite.feedW_Context).fd_item_value41.setText(String.format("%.2f", (maxFlo0 / adjustmentValue)) + "%");
+          ((FeedWrite) FeedWrite.feedW_Context).fd_item_value42.setText(String.format("%.2f", (maxFlo1 / adjustmentValue)) + "%");
+          ((FeedWrite) FeedWrite.feedW_Context).fd_item_value43.setText(String.format("%.2f", (maxFlo2 / adjustmentValue)) + "%");
+        }else if(content == 5) {
+          ((FeedWrite) FeedWrite.feedW_Context).fd_mission5.setVisibility(View.VISIBLE);
+          ((FeedWrite) FeedWrite.feedW_Context).fd_item51.setText(maxTxt0);
+          ((FeedWrite) FeedWrite.feedW_Context).fd_item52.setText(maxTxt1);
+          ((FeedWrite) FeedWrite.feedW_Context).fd_item53.setText(maxTxt2);
+          ((FeedWrite) FeedWrite.feedW_Context).fd_item_value51.setText(String.format("%.2f", (maxFlo0 / adjustmentValue)) + "%");
+          ((FeedWrite) FeedWrite.feedW_Context).fd_item_value52.setText(String.format("%.2f", (maxFlo1 / adjustmentValue)) + "%");
+          ((FeedWrite) FeedWrite.feedW_Context).fd_item_value53.setText(String.format("%.2f", (maxFlo2 / adjustmentValue)) + "%");
         }
 
         finish();
@@ -1068,7 +1084,6 @@ public abstract class CameraActivity extends AppCompatActivity
       options.inSampleSize = 8;
       Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath(), options);
 
-      Log.e("TAG", "bit = "+bitmap );
 //      imageView.setImageBitmap(bitmap);
     }
   }

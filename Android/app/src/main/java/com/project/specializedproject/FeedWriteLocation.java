@@ -31,8 +31,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.pedro.library.AutoPermissions;
 
 public class FeedWriteLocation extends AppCompatActivity {
-    final private String TAG = "FeedDetail";
-
+    final private String TAG = "FeedWriteLocation";
     SupportMapFragment mapFragment;
     GoogleMap mMap;
     private Marker currentMarker = null;
@@ -79,6 +78,19 @@ public class FeedWriteLocation extends AppCompatActivity {
 
                         googleMap.clear();
                         googleMap.addMarker(markerOptions);
+                        if(content == 0)
+                            ((FeedWrite) FeedWrite.feedW_Context).feedW_location0.setText(select_latitude +"\n"+ select_longitude);
+                        else if (content == 1)
+                            ((FeedWrite) FeedWrite.feedW_Context).feedW_location1.setText(select_latitude +"\n"+ select_longitude);
+                        else if (content == 2)
+                            ((FeedWrite) FeedWrite.feedW_Context).feedW_location2.setText(select_latitude +"\n"+ select_longitude);
+                        else if (content == 3)
+                            ((FeedWrite) FeedWrite.feedW_Context).feedW_location3.setText(select_latitude +"\n"+ select_longitude);
+                        else if (content == 4)
+                            ((FeedWrite) FeedWrite.feedW_Context).feedW_location4.setText(select_latitude +"\n"+ select_longitude);
+                        else if (content == 5)
+                            ((FeedWrite) FeedWrite.feedW_Context).feedW_location5.setText(select_latitude +"\n"+ select_longitude);
+
 //                if ( currentMarker != null )
 //                    mMap.clear();
 //                currentMarker = mMap.addMarker(markerOptions);
@@ -205,8 +217,6 @@ public class FeedWriteLocation extends AppCompatActivity {
         if(view.getId() == R.id.writeLocation_myLocation){
             startLocationService();
         }else if(view.getId() == R.id.writeLocation_Btn){
-
-            //todo interface
             finish();
         }
     }

@@ -35,6 +35,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -52,9 +53,9 @@ public class FeedDetail extends AppCompatActivity implements FeedDetailAdapter.c
     RecyclerView rList;
     FeedDetailAdapter listAdapter;
     ArrayList<ModelFeed> mFeed = new ArrayList<>();
-    String[][] fArray = new String[100][5];
+    String[][] fArray = new String[5][5];
     int fArrayNum = 0;
-
+    String fid;
     SupportMapFragment mapFragment;
     GoogleMap mMap;
     private Marker currentMarker = null;
@@ -73,6 +74,8 @@ public class FeedDetail extends AppCompatActivity implements FeedDetailAdapter.c
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed_detail);
+        Intent intent = getIntent();
+        fid = intent.getExtras().getString("fid");
         setView();
 
         searchFeed();
@@ -88,7 +91,7 @@ public class FeedDetail extends AppCompatActivity implements FeedDetailAdapter.c
             @Override
             public void onMapReady(GoogleMap googleMap) {
                 mMap = googleMap;
-                setDefaultLocation();
+                searchMap();
                 detail_courseLocation.setBackgroundColor(Color.parseColor("#F2BA77"));
             }
         });
@@ -101,11 +104,71 @@ public class FeedDetail extends AppCompatActivity implements FeedDetailAdapter.c
         AutoPermissions.Companion.loadAllPermissions(this, 100);
     }
 
+    String tmpLoc0, tmpLoc1, tmpLoc2, tmpLoc3, tmpLoc4, tmpLoc5;
+    String[] location0 = new String[2];
+    String[] location1 = new String[2];
+    String[] location2 = new String[2];
+    String[] location3 = new String[2];
+    String[] location4 = new String[2];
+    String[] location5 = new String[2];
+
+    private void searchMap(){
+        Query searchData = FirebaseDatabase.getInstance().getReference("Feed").orderByChild("fid").equalTo(fid);
+        searchData.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists() && dataSnapshot.getChildrenCount() > 0){
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        Map map = (Map) snapshot.getValue();
+                        Iterator<String> Iterator = map.keySet().iterator();
+                        while (Iterator.hasNext()) {
+                            String next = Iterator.next();
+
+                            tmpLoc0 = (String) map.get("feedW_location0");
+                            tmpLoc1 = (String) map.get("feedW_location1");
+                            tmpLoc2 = (String) map.get("feedW_location2");
+                            tmpLoc3 = (String) map.get("feedW_location3");
+                            tmpLoc4 = (String) map.get("feedW_location4");
+                            tmpLoc5 = (String) map.get("feedW_location5");
+                        }
+                    }
+                    if(tmpLoc0 != null && !tmpLoc0.equals(""))
+                        location0 = tmpLoc0.split("\n");
+                    if(tmpLoc1 != null && !tmpLoc1.equals(""))
+                        location1 = tmpLoc1.split("\n");
+                    if(tmpLoc2 != null && !tmpLoc2.equals(""))
+                        location2 = tmpLoc2.split("\n");
+                    if(tmpLoc3 != null && !tmpLoc3.equals(""))
+                        location3 = tmpLoc3.split("\n");
+                    if(tmpLoc4 != null && !tmpLoc4.equals(""))
+                        location4 = tmpLoc4.split("\n");
+                    if(tmpLoc5 != null && !tmpLoc5.equals(""))
+                        location5 = tmpLoc5.split("\n");
+                    setDefaultLocation();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+    }
+
+
     // default location
     private void setDefaultLocation() {
-        LatLng DEFAULT_LOCATION = new LatLng(36.629, 127.456);
-        String markerTitle = "위치정보를 불러올 수 없습니다.";
-        String markerSnippet = "위치 권한과 GPS 활성 여부를 확인해 주세요.";
+        LatLng DEFAULT_LOCATION;
+        String markerTitle;
+        String markerSnippet;
+        if(tmpLoc0 == null || tmpLoc0.equals("")) {
+            DEFAULT_LOCATION = new LatLng(36.629, 127.456);
+            markerTitle = "위치정보를 불러올 수 없습니다.";
+            markerSnippet = "위치 권한과 GPS 활성 여부를 확인해 주세요.";
+        }else {
+            DEFAULT_LOCATION = new LatLng(Double.parseDouble(location0[0]), Double.parseDouble(location0[1]));
+            markerTitle = "주요 위치";
+            markerSnippet = "주변 핀의 도전과제를 찾아보세요!";
+        }
 
         if (currentMarker != null) currentMarker.remove();
 
@@ -113,11 +176,69 @@ public class FeedDetail extends AppCompatActivity implements FeedDetailAdapter.c
         markerOptions.position(DEFAULT_LOCATION);
         markerOptions.title(markerTitle);
         markerOptions.snippet(markerSnippet);
-        markerOptions.draggable(true);
+        BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.pin0);
+        markerOptions.icon(icon);
+        markerOptions.draggable(false);
         currentMarker = mMap.addMarker(markerOptions);
+
+        missionMarker();
 
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(DEFAULT_LOCATION, 15);
         mMap.moveCamera(cameraUpdate);
+    }
+
+    private void missionMarker(){   // todo 핀 이미지 변경@@
+        LatLng Mission_LOCATION;
+        MarkerOptions markerOptions = new MarkerOptions();
+        PolylineOptions polyOptions = new PolylineOptions().clickable(true);
+        polyOptions.add(new LatLng(Double.parseDouble(location0[0]), Double.parseDouble(location0[1])));
+
+        if(tmpLoc1 != null && !tmpLoc1.equals("")){
+            Mission_LOCATION = new LatLng(Double.parseDouble(location1[0]), Double.parseDouble(location1[1]));
+            polyOptions.add(new LatLng(Double.parseDouble(location1[0]), Double.parseDouble(location1[1])));
+            BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.pin1);
+            markerOptions.icon(icon);
+            markerOptions.position(Mission_LOCATION);
+            markerOptions.title("도전과제1");
+            currentMarker = mMap.addMarker(markerOptions);
+        }
+        if(tmpLoc2 != null && !tmpLoc2.equals("")){
+            Mission_LOCATION = new LatLng(Double.parseDouble(location2[0]), Double.parseDouble(location2[1]));
+            polyOptions.add(new LatLng(Double.parseDouble(location2[0]), Double.parseDouble(location2[1])));
+            BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.pin2);
+            markerOptions.icon(icon);
+            markerOptions.position(Mission_LOCATION);
+            markerOptions.title("도전과제2");
+            currentMarker = mMap.addMarker(markerOptions);
+        }
+        if(tmpLoc3 != null && !tmpLoc3.equals("")){
+            Mission_LOCATION = new LatLng(Double.parseDouble(location3[0]), Double.parseDouble(location3[1]));
+            polyOptions.add(new LatLng(Double.parseDouble(location3[0]), Double.parseDouble(location3[1])));
+            BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.pin3);
+            markerOptions.icon(icon);
+            markerOptions.position(Mission_LOCATION);
+            markerOptions.title("도전과제3");
+            currentMarker = mMap.addMarker(markerOptions);
+        }
+        if(tmpLoc4 != null && !tmpLoc4.equals("")){
+            Mission_LOCATION = new LatLng(Double.parseDouble(location4[0]), Double.parseDouble(location4[1]));
+            polyOptions.add(new LatLng(Double.parseDouble(location4[0]), Double.parseDouble(location4[1])));
+            BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.pin4);
+            markerOptions.icon(icon);
+            markerOptions.position(Mission_LOCATION);
+            markerOptions.title("도전과제4");
+            currentMarker = mMap.addMarker(markerOptions);
+        }
+        if(tmpLoc5 != null && !tmpLoc5.equals("")){
+            Mission_LOCATION = new LatLng(Double.parseDouble(location5[0]), Double.parseDouble(location5[1]));
+            polyOptions.add(new LatLng(Double.parseDouble(location5[0]), Double.parseDouble(location5[1])));
+            BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.pin5);
+            markerOptions.icon(icon);
+            markerOptions.position(Mission_LOCATION);
+            markerOptions.title("도전과제5");
+            currentMarker = mMap.addMarker(markerOptions);
+        }
+        mMap.addPolyline(polyOptions.color(Color.parseColor("#FF9345")));
     }
 
     // my location
@@ -227,9 +348,6 @@ public class FeedDetail extends AppCompatActivity implements FeedDetailAdapter.c
     }
 
     private void searchFeed() {
-        Intent intent = getIntent();
-        String fid = intent.getExtras().getString("fid");
-
         Query searchData = FirebaseDatabase.getInstance().getReference("Feed").orderByChild("fid").equalTo(fid);
         searchData.addValueEventListener(new ValueEventListener() {
             @Override
@@ -245,21 +363,25 @@ public class FeedDetail extends AppCompatActivity implements FeedDetailAdapter.c
                             String next = Iterator.next();
                             setString(fArrayNum);
 
-                            // Main info
-                            Glide.with(getApplicationContext()).load((String) map.get("feedW_photo0")).into(detail_photo);
-                            detail_title.setText((String) map.get("feedW_title0"));
-                            detail_note.setText((String) map.get("feedW_note0"));
-
-                            if((String) map.get(title) != null) { // index = title
-                                fArray[fArrayNum][0] = (String) map.get(title);
-                                fArray[fArrayNum][1] = (String) map.get(note);
-                                fArray[fArrayNum][2] = (String) map.get(photo);
-                                fArray[fArrayNum][3] = (String) map.get(location);
-                                fArray[fArrayNum][4] = (String) map.get("fid");
-
-                                fArrayNum++;
-                            }else{
+                            if(fArrayNum >= 5){
                                 break;
+                            }else {
+                                // Main info
+                                Glide.with(getApplicationContext()).load((String) map.get("feedW_photo0")).into(detail_photo);
+                                detail_title.setText((String) map.get("feedW_title0"));
+                                detail_note.setText((String) map.get("feedW_note0"));
+
+                                if ((String) map.get(title) != null) { // index = title
+                                    fArray[fArrayNum][0] = (String) map.get(title);
+                                    fArray[fArrayNum][1] = (String) map.get(note);
+                                    fArray[fArrayNum][2] = (String) map.get(photo);
+                                    fArray[fArrayNum][3] = (String) map.get(location);
+                                    fArray[fArrayNum][4] = (String) map.get("fid");
+
+                                    fArrayNum++;
+                                } else {
+                                    break;
+                                }
                             }
                         }
                     }
@@ -300,9 +422,9 @@ public class FeedDetail extends AppCompatActivity implements FeedDetailAdapter.c
             detail_myLocation.setBackgroundColor(Color.parseColor("#F2BA77"));
             detail_courseLocation.setBackgroundColor(Color.parseColor("#00ffffff"));
         }else if( view.getId() == R.id.detail_zoomIn ){
-
+            mMap.animateCamera(CameraUpdateFactory.zoomIn());
         }else if( view.getId() == R.id.detail_zoomOut ){
-
+            mMap.animateCamera(CameraUpdateFactory.zoomOut());
         }
     }
 

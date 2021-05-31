@@ -6,11 +6,9 @@
 ---
 ### Updates
 Note
-* ## Adding Machine Learning function
+* ## Add Location function
 
-- Image classification model (exam)
-- Mission function
-- Add ect Pages.
+- ..
 
 ### Features
 - tools :: Android Studio (Java)
@@ -21,11 +19,15 @@ Note
 2) https://github.com/zhanghai/MaterialRatingBar
 3) https://github.com/tensorflow/examples
 4) https://github.com/bumptech/glide
-5) https://github.com/square/picasso //
-6) https://github.com/hdodenhof/CircleImageView //
+5) https://github.com/square/picasso // Disable
+6) https://github.com/hdodenhof/CircleImageView // Disable
 ```
 ---
 # Preview Image
+
+![updateReadme](https://user-images.githubusercontent.com/63622578/120171562-24bb9980-c23d-11eb-8680-9de7a5701155.png)
+
+---
 
 ![ml](https://user-images.githubusercontent.com/63622578/120056693-ec6b5e00-c078-11eb-8bd4-3b24f902b03c.png)
 

@@ -47,11 +47,11 @@ public class FeedWrite extends AppCompatActivity {
     public static Context feedW_Context;
     FeedWriteLocation feedWriteLocation;
 
-    LinearLayout feedW_layout0, feedW_layout1, feedW_layout2, feedW_layout3;
-    TextView feedW_title0, feedW_title1, feedW_title2, feedW_title3;
-    TextView feedW_note0, feedW_note1, feedW_note2, feedW_note3;
-    ImageButton feedW_photo0, feedW_photo1, feedW_photo2, feedW_photo3;
-    Button feedW_location0, feedW_location1, feedW_location2, feedW_location3;
+    LinearLayout feedW_layout0, feedW_layout1, feedW_layout2, feedW_layout3, feedW_layout4, feedW_layout5;
+    TextView feedW_title0, feedW_title1, feedW_title2, feedW_title3, feedW_title4, feedW_title5;
+    TextView feedW_note0, feedW_note1, feedW_note2, feedW_note3, feedW_note4, feedW_note5;
+    ImageButton feedW_photo0, feedW_photo1, feedW_photo2, feedW_photo3, feedW_photo4, feedW_photo5;
+    Button feedW_location0, feedW_location1, feedW_location2, feedW_location3, feedW_location4, feedW_location5;
 
     // 반복x
     TextView feedW_distance, feedW_time;
@@ -62,18 +62,22 @@ public class FeedWrite extends AppCompatActivity {
     LinearLayout fd_mission1, fd_mission2, fd_mission3, fd_mission4, fd_mission5;
     TextView fd_item11, fd_item12, fd_item13,
             fd_item21, fd_item22, fd_item23,
-            fd_item31, fd_item32, fd_item33;
+            fd_item31, fd_item32, fd_item33,
+            fd_item41, fd_item42, fd_item43,
+            fd_item51, fd_item52, fd_item53;
     TextView fd_item_value11, fd_item_value12, fd_item_value13,
             fd_item_value21, fd_item_value22, fd_item_value23,
-            fd_item_value31, fd_item_value32, fd_item_value33;
+            fd_item_value31, fd_item_value32, fd_item_value33,
+            fd_item_value41, fd_item_value42, fd_item_value43,
+            fd_item_value51, fd_item_value52, fd_item_value53;
 
     int stateNum = 0; // 레이아웃 추가, 삭제
     int fid = 0; // auto_increment
 
     FirebaseStorage firebaseStorage = FirebaseStorage.getInstance(); // 초기화 필수
     int layoutNum = 0; // 활성화 레이아웃
-    Uri photoUri[] = new Uri[5];
-    String photo[] = new String[5];
+    Uri photoUri[] = new Uri[6];
+    String photo[] = new String[6];
     int photoNum; // 버튼) 해당 이미지 번호
     int proceedMaxNum[] = new int[2]; // Task 검증 :: 0= for, 1= Task
 
@@ -136,17 +140,61 @@ public class FeedWrite extends AppCompatActivity {
                 gallery();
                 bPhoto0 = false;
             }
+        }else if(view.getId() == R.id. feedW_photo4){
+            if(bPhoto0 == false){
+                Intent intent = new Intent(this, ClassifierActivity.class);
+                intent.putExtra("state",  "write");
+                intent.putExtra("content",  4);
+                startActivity(intent);
+                bPhoto0 = true;
+            }else{
+                photoNum = 4;
+                gallery();
+                bPhoto0 = false;
+            }
+        }else if(view.getId() == R.id. feedW_photo5){
+            if(bPhoto0 == false){
+                Intent intent = new Intent(this, ClassifierActivity.class);
+                intent.putExtra("state",  "write");
+                intent.putExtra("content",  5);
+                startActivity(intent);
+                bPhoto0 = true;
+            }else{
+                photoNum = 5;
+                gallery();
+                bPhoto0 = false;
+            }
         }else if(view.getId() == R.id.feedW_location0){ // -- default Location
+            feedW_location0.setError(null);
             Intent intent = new Intent(this, FeedWriteLocation.class);
 //            intent.putExtra("fid",  fid); // 피드 번호
             intent.putExtra("content",  0); // 도전과제 번호
             startActivity(intent);
         }else if(view.getId() == R.id.feedW_location1){
-
+            feedW_location1.setError(null);
+            Intent intent = new Intent(this, FeedWriteLocation.class);
+            intent.putExtra("content",  1);
+            startActivity(intent);
         }else if(view.getId() == R.id.feedW_location2){
-
+            feedW_location2.setError(null);
+            Intent intent = new Intent(this, FeedWriteLocation.class);
+            intent.putExtra("content",  2);
+            startActivity(intent);
         }else if(view.getId() == R.id.feedW_location3){
-
+            feedW_location3.setError(null);
+            Intent intent = new Intent(this, FeedWriteLocation.class);
+            intent.putExtra("content",  3);
+            startActivity(intent);
+        }else if(view.getId() == R.id.feedW_location4){
+            feedW_location4.setError(null);
+            Intent intent = new Intent(this, FeedWriteLocation.class);
+            intent.putExtra("content",  4);
+            startActivity(intent);
+        }else if(view.getId() == R.id.feedW_location5){
+            feedW_location5.setError(null);
+            Intent intent = new Intent(this, FeedWriteLocation.class);
+            intent.putExtra("content",  5);
+            startActivity(intent);
         }
     }
 
@@ -159,6 +207,10 @@ public class FeedWrite extends AppCompatActivity {
         }
         if (TextUtils.isEmpty(feedW_note0.getText().toString())) {
             feedW_note0.setError("내용을 입력해 주세요.");
+            isValidation = false;
+        }
+        if (TextUtils.isEmpty(feedW_location0.getText().toString())) {
+            feedW_location0.setError("주요 위치를 선택해 주세요.");
             isValidation = false;
         }
         if (TextUtils.isEmpty(feedW_distance.getText().toString())) {
@@ -182,6 +234,10 @@ public class FeedWrite extends AppCompatActivity {
                 feedW_title1.setError("제목을 입력해 주세요.");
                 isValidation = false;
             }
+            if (TextUtils.isEmpty(feedW_location1.getText().toString())) {
+                feedW_location1.setError("포토존 위치를 선택해 주세요.");
+                isValidation = false;
+            }
         }
         if(feedW_layout2.getVisibility() == View.VISIBLE) {
             layoutNum = 2;
@@ -189,11 +245,41 @@ public class FeedWrite extends AppCompatActivity {
                 feedW_title2.setError("제목을 입력해 주세요.");
                 isValidation = false;
             }
+            if (TextUtils.isEmpty(feedW_location2.getText().toString())) {
+                feedW_location2.setError("포토존 위치를 선택해 주세요.");
+                isValidation = false;
+            }
         }
         if (feedW_layout3.getVisibility() == View.VISIBLE) {
             layoutNum = 3;
             if (TextUtils.isEmpty(feedW_title3.getText().toString())) {
                 feedW_title3.setError("제목을 입력해 주세요.");
+                isValidation = false;
+            }
+            if (TextUtils.isEmpty(feedW_location3.getText().toString())) {
+                feedW_location3.setError("포토존 위치를 선택해 주세요.");
+                isValidation = false;
+            }
+        }
+        if (feedW_layout4.getVisibility() == View.VISIBLE) {
+            layoutNum = 4;
+            if (TextUtils.isEmpty(feedW_title4.getText().toString())) {
+                feedW_title4.setError("제목을 입력해 주세요.");
+                isValidation = false;
+            }
+            if (TextUtils.isEmpty(feedW_location4.getText().toString())) {
+                feedW_location4.setError("포토존 위치를 선택해 주세요.");
+                isValidation = false;
+            }
+        }
+        if (feedW_layout5.getVisibility() == View.VISIBLE) {
+            layoutNum = 5;
+            if (TextUtils.isEmpty(feedW_title5.getText().toString())) {
+                feedW_title5.setError("제목을 입력해 주세요.");
+                isValidation = false;
+            }
+            if (TextUtils.isEmpty(feedW_location5.getText().toString())) {
+                feedW_location5.setError("포토존 위치를 선택해 주세요.");
                 isValidation = false;
             }
         }
@@ -339,6 +425,30 @@ public class FeedWrite extends AppCompatActivity {
                     hashMap.put("fd_item_value31", fd_item_value31.getText().toString());
                     hashMap.put("fd_item_value32", fd_item_value32.getText().toString());
                     hashMap.put("fd_item_value33", fd_item_value33.getText().toString());
+                    if(layoutNum >= 4){
+                        hashMap.put("feedW_title4", feedW_title4.getText().toString());
+                        hashMap.put("feedW_note4", feedW_note4.getText().toString());
+                        hashMap.put("feedW_photo4", photo[4]);
+                        hashMap.put("feedW_location4", feedW_location4.getText().toString());
+                        hashMap.put("fd_item41", fd_item41.getText().toString());
+                        hashMap.put("fd_item42", fd_item42.getText().toString());
+                        hashMap.put("fd_item43", fd_item43.getText().toString());
+                        hashMap.put("fd_item_value41", fd_item_value41.getText().toString());
+                        hashMap.put("fd_item_value42", fd_item_value42.getText().toString());
+                        hashMap.put("fd_item_value43", fd_item_value43.getText().toString());
+                        if(layoutNum >= 5){
+                            hashMap.put("feedW_title5", feedW_title5.getText().toString());
+                            hashMap.put("feedW_note5", feedW_note5.getText().toString());
+                            hashMap.put("feedW_photo5", photo[5]);
+                            hashMap.put("feedW_location5", feedW_location5.getText().toString());
+                            hashMap.put("fd_item51", fd_item51.getText().toString());
+                            hashMap.put("fd_item52", fd_item52.getText().toString());
+                            hashMap.put("fd_item53", fd_item53.getText().toString());
+                            hashMap.put("fd_item_value51", fd_item_value51.getText().toString());
+                            hashMap.put("fd_item_value52", fd_item_value52.getText().toString());
+                            hashMap.put("fd_item_value53", fd_item_value53.getText().toString());
+                        }
+                    }
                 }
             }
         }
@@ -375,6 +485,10 @@ public class FeedWrite extends AppCompatActivity {
                         Glide.with(this).load(photoUri[photoNum]).into(feedW_photo2);
                     if(photoNum == 3)
                         Glide.with(this).load(photoUri[photoNum]).into(feedW_photo3);
+                    if(photoNum == 4)
+                        Glide.with(this).load(photoUri[photoNum]).into(feedW_photo4);
+                    if(photoNum == 5)
+                        Glide.with(this).load(photoUri[photoNum]).into(feedW_photo5);
                 }
                 break;
         }
@@ -416,14 +530,32 @@ public class FeedWrite extends AppCompatActivity {
                 break;
             case 3:
                 if(dif.equals("plus")){
-                    Toast.makeText(getApplicationContext(), "최대 "+stateNum+"개의 코스 등록이 가능합니다.",Toast.LENGTH_SHORT).show();
+                    feedW_layout4.setVisibility(View.VISIBLE);
+                    stateNum++;
                 }else{
                     feedW_layout3.setVisibility(View.GONE);
                     stateNum--;
                 }
                 break;
+            case 4:
+                if(dif.equals("plus")){
+                    feedW_layout5.setVisibility(View.VISIBLE);
+                    stateNum++;
+                }else{
+                    feedW_layout4.setVisibility(View.GONE);
+                    stateNum--;
+                }
+                break;
+            case 5:
+                if(dif.equals("plus")){
+                    Toast.makeText(getApplicationContext(), "최대 "+stateNum+"개의 코스 등록이 가능합니다.",Toast.LENGTH_SHORT).show();
+                }else{
+                    feedW_layout5.setVisibility(View.GONE);
+                    stateNum--;
+                }
+                break;
             default:
-                Toast.makeText(getApplicationContext(), "최소 1개, 최대 5개 코스 등록이 가능합니다.",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "최소 1개, 최대 "+stateNum+"개 코스 등록이 가능합니다.",Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -460,6 +592,21 @@ public class FeedWrite extends AppCompatActivity {
         feedW_photo3.setOnClickListener(this::onClick);
         feedW_location3.setOnClickListener(this::onClick);
 
+        feedW_layout4 = findViewById(R.id.feedW_layout4);
+        feedW_title4 = findViewById(R.id.feedW_title4);
+        feedW_note4 = findViewById(R.id.feedW_note4);
+        feedW_photo4 = findViewById(R.id.feedW_photo4);
+        feedW_location4 = findViewById(R.id.feedW_location4);
+        feedW_photo4.setOnClickListener(this::onClick);
+        feedW_location4.setOnClickListener(this::onClick);
+
+        feedW_layout5 = findViewById(R.id.feedW_layout5);
+        feedW_title5 = findViewById(R.id.feedW_title5);
+        feedW_note5 = findViewById(R.id.feedW_note5);
+        feedW_photo5 = findViewById(R.id.feedW_photo5);
+        feedW_location5 = findViewById(R.id.feedW_location5);
+        feedW_photo5.setOnClickListener(this::onClick);
+        feedW_location5.setOnClickListener(this::onClick);
 
         feedW_distance = findViewById(R.id.feedW_distance);
         feedW_time = findViewById(R.id.feedW_time);
@@ -475,6 +622,8 @@ public class FeedWrite extends AppCompatActivity {
         fd_mission1 = findViewById(R.id.fd_mission1);
         fd_mission2 = findViewById(R.id.fd_mission2);
         fd_mission3 = findViewById(R.id.fd_mission3);
+        fd_mission4 = findViewById(R.id.fd_mission4);
+        fd_mission5 = findViewById(R.id.fd_mission5);
 
         fd_item11 = findViewById(R.id.fd_item11);
         fd_item12 = findViewById(R.id.fd_item12);
@@ -496,5 +645,19 @@ public class FeedWrite extends AppCompatActivity {
         fd_item_value31 = findViewById(R.id.fd_item_value31);
         fd_item_value32 = findViewById(R.id.fd_item_value32);
         fd_item_value33 = findViewById(R.id.fd_item_value33);
+
+        fd_item41 = findViewById(R.id.fd_item41);
+        fd_item42 = findViewById(R.id.fd_item42);
+        fd_item43 = findViewById(R.id.fd_item43);
+        fd_item_value41 = findViewById(R.id.fd_item_value41);
+        fd_item_value42 = findViewById(R.id.fd_item_value42);
+        fd_item_value43 = findViewById(R.id.fd_item_value43);
+
+        fd_item51 = findViewById(R.id.fd_item51);
+        fd_item52 = findViewById(R.id.fd_item52);
+        fd_item53 = findViewById(R.id.fd_item53);
+        fd_item_value51 = findViewById(R.id.fd_item_value51);
+        fd_item_value52 = findViewById(R.id.fd_item_value52);
+        fd_item_value53 = findViewById(R.id.fd_item_value53);
     }
 }

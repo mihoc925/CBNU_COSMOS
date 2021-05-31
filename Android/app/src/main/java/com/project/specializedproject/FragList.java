@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -201,9 +200,6 @@ public class FragList extends Fragment {
 
     public void onClick(View view){
         if(view.getId() == R.id.list_locationLayout){
-            // TODO 커스텀 다이어로그
-            Log.e(TAG, "list_locationLayout");
-
         }else if(view.getId() == R.id.list_filter){
             DisplayMetrics dm = getContext().getResources().getDisplayMetrics();
             int width = dm.widthPixels;
