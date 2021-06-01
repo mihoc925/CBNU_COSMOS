@@ -4,12 +4,6 @@
 - This app is a Service that recommends 'dating courses' and provides 'missions'.
 - We are making this app using Android & Machine Learning & Platform Server.
 ---
-### Updates
-Note
-* ## Add Location function
-
-- ..
-
 ### Features
 - tools :: Android Studio (Java)
 - platform & Library :: Firebase, Tensorflow
@@ -23,7 +17,15 @@ Note
 6) https://github.com/hdodenhof/CircleImageView // Disable
 ```
 ---
+### Updates
+Note
+* nothing..
+
 # Preview Image
+
+![finish2](https://user-images.githubusercontent.com/63622578/120318629-075cfd00-c31b-11eb-8992-248eec29be71.png)
+
+---
 
 ![updateReadme](https://user-images.githubusercontent.com/63622578/120171562-24bb9980-c23d-11eb-8680-9de7a5701155.png)
 
