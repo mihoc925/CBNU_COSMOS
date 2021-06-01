@@ -32,33 +32,22 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:text="구현 중 입니다 :("
-                    android:fontFamily="@font/roboto"
-                    android:textSize="32sp"
-                    android:textStyle="bold"
-                    android:textColor="#F2F2F2"
-                    android:shadowColor="#60000000"
-                    android:shadowDx="-4"
-                    android:shadowDy="4"
-                    android:shadowRadius="4"
-                    android:gravity="center"
+                    android:text="진행 중인 미션"
+                    android:background="@drawable/layout_shadow"
+                    android:fontFamily="@font/binggrae"
+                    android:textSize="14sp"
+                    android:textColor="#000000"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:gravity="center|left"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
-                <Button
-                    android:id="@+id/home_test"
-                    android:text="테스트"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="#707070"
-                    android:background="@drawable/round_edge10_btn"
-                    android:layout_gravity="center"
-                    android:layout_margin="10dp"
-                    android:layout_width="120dp"
-                    android:layout_height="45dp"/>
-
-
-
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/home_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
             </LinearLayout>
 

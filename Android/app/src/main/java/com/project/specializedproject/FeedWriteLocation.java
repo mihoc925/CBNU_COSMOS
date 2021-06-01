@@ -78,22 +78,8 @@ public class FeedWriteLocation extends AppCompatActivity {
 
                         googleMap.clear();
                         googleMap.addMarker(markerOptions);
-                        if(content == 0)
-                            ((FeedWrite) FeedWrite.feedW_Context).feedW_location0.setText(select_latitude +"\n"+ select_longitude);
-                        else if (content == 1)
-                            ((FeedWrite) FeedWrite.feedW_Context).feedW_location1.setText(select_latitude +"\n"+ select_longitude);
-                        else if (content == 2)
-                            ((FeedWrite) FeedWrite.feedW_Context).feedW_location2.setText(select_latitude +"\n"+ select_longitude);
-                        else if (content == 3)
-                            ((FeedWrite) FeedWrite.feedW_Context).feedW_location3.setText(select_latitude +"\n"+ select_longitude);
-                        else if (content == 4)
-                            ((FeedWrite) FeedWrite.feedW_Context).feedW_location4.setText(select_latitude +"\n"+ select_longitude);
-                        else if (content == 5)
-                            ((FeedWrite) FeedWrite.feedW_Context).feedW_location5.setText(select_latitude +"\n"+ select_longitude);
 
-//                if ( currentMarker != null )
-//                    mMap.clear();
-//                currentMarker = mMap.addMarker(markerOptions);
+                        setFeedWriteLocation(); // 위치 FeedWrite 페이지 저장
                     }
                 });
             }
@@ -105,6 +91,21 @@ public class FeedWriteLocation extends AppCompatActivity {
         }
 
         AutoPermissions.Companion.loadAllPermissions(this, 100);
+    }
+
+    private void setFeedWriteLocation(){
+        if(content == 0)
+            ((FeedWrite) FeedWrite.feedW_Context).feedW_location0.setText(select_latitude +"\n"+ select_longitude);
+        else if (content == 1)
+            ((FeedWrite) FeedWrite.feedW_Context).feedW_location1.setText(select_latitude +"\n"+ select_longitude);
+        else if (content == 2)
+            ((FeedWrite) FeedWrite.feedW_Context).feedW_location2.setText(select_latitude +"\n"+ select_longitude);
+        else if (content == 3)
+            ((FeedWrite) FeedWrite.feedW_Context).feedW_location3.setText(select_latitude +"\n"+ select_longitude);
+        else if (content == 4)
+            ((FeedWrite) FeedWrite.feedW_Context).feedW_location4.setText(select_latitude +"\n"+ select_longitude);
+        else if (content == 5)
+            ((FeedWrite) FeedWrite.feedW_Context).feedW_location5.setText(select_latitude +"\n"+ select_longitude);
     }
 
     // default location
@@ -122,7 +123,7 @@ public class FeedWriteLocation extends AppCompatActivity {
         markerOptions.draggable(true);
         currentMarker = mMap.addMarker(markerOptions);
 
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(DEFAULT_LOCATION, 15);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(DEFAULT_LOCATION, 17);
         mMap.moveCamera(cameraUpdate);
     }
 
@@ -193,12 +194,11 @@ public class FeedWriteLocation extends AppCompatActivity {
     private void showCurrentLocation(Double latitude, Double longitude) {
         LatLng curPoint = new LatLng(latitude, longitude);
 
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(curPoint, 15));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(curPoint, 17));
 
         Toast.makeText(getApplicationContext(), "실행", Toast.LENGTH_LONG).show();
         String markerTitle = "내위치";
         String markerSnippet = "위치정보가 확인되었습니다.";
-
         if (currentMarker != null) currentMarker.remove();
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(curPoint);
@@ -209,8 +209,13 @@ public class FeedWriteLocation extends AppCompatActivity {
         markerOptions.draggable(true);
         currentMarker = mMap.addMarker(markerOptions);
 
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(curPoint, 15);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(curPoint, 17);
         mMap.moveCamera(cameraUpdate);
+
+        // 현재 위치 자동 저장
+        select_latitude = latitude; // 위도
+        select_longitude = longitude; // 경도
+        setFeedWriteLocation(); // 위치 FeedWrite 페이지 저장
     }
 
     public void onClick(View view){

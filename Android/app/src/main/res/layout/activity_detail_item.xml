@@ -68,6 +68,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1">
             <ImageView
+                android:id="@+id/dti_locationImg"
                 android:src="@drawable/btn_location"
                 android:scaleType="fitCenter"
                 android:layout_gravity="center"

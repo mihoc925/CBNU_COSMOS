@@ -21,9 +21,10 @@ public class ModelFeed extends Application {
     private String feedW_note;
     private String feedW_photo;
     private String feedW_location;
+    private String fd_item;
 
     public ModelFeed(){}
-    public ModelFeed(String fid, String uid, String c_date, String u_date, String feedW_distance, String feedW_time, String feedW_count, String feedW_title0, String feedW_note0, String feedW_photo0, String feedW_location0, String feedW_title, String feedW_note, String feedW_photo, String feedW_location) {
+    public ModelFeed(String fid, String uid, String c_date, String u_date, String feedW_distance, String feedW_time, String feedW_count, String feedW_title0, String feedW_note0, String feedW_photo0, String feedW_location0, String feedW_title, String feedW_note, String feedW_photo, String feedW_location, String fd_item) {
         this.fid = fid;
         this.uid = uid;
         this.c_date = c_date;
@@ -39,6 +40,7 @@ public class ModelFeed extends Application {
         this.feedW_note = feedW_note;
         this.feedW_photo = feedW_photo;
         this.feedW_location = feedW_location;
+        this.fd_item = fd_item;
     }
 
     public String getFid() {
@@ -130,5 +132,11 @@ public class ModelFeed extends Application {
     }
     public void setFeedW_location(String feedW_location) {
         this.feedW_location = feedW_location;
+    }
+    public String getFd_item() {
+        return fd_item;
+    }
+    public void setFd_item(String fd_item) {
+        this.fd_item = fd_item;
     }
 }

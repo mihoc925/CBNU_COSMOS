@@ -1,44 +1,26 @@
 package com.project.specializedproject;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.DisplayMetrics;
 import android.view.View;
-import android.view.animation.Animation;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.request.target.DrawableImageViewTarget;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.HashMap;
 import java.util.regex.Pattern;
@@ -46,7 +28,6 @@ import java.util.regex.Pattern;
 public class AccountRegit extends AppCompatActivity {
     private String TAG = "AccountRegit";
     ProgressDialog pd;
-    boolean nickExistence = false;
 
     EditText regit_email, regit_nick, regit_phone, regit_pass, regit_repass;
     Button regit_loginBtn, regit_Btn;
@@ -103,13 +84,8 @@ public class AccountRegit extends AppCompatActivity {
             regit_email.setError("이메일 형식으로 입력해주세요.");
             isValidation = false;
         }
-        // 닉네임 검사
-        searchNick();
         if (TextUtils.isEmpty(regit_nick.getText().toString())){
             regit_nick.setError("닉네임을 입력해 주세요.");
-            isValidation = false;
-        }else if(nickExistence == false){
-            regit_nick.setError("이미 사용중인 닉네임입니다.");
             isValidation = false;
         }
         if (TextUtils.isEmpty(regit_phone.getText().toString())) {
@@ -139,24 +115,6 @@ public class AccountRegit extends AppCompatActivity {
                     regit_phone.getText().toString(), regit_pass.getText().toString());
             pd.show();
         }
-    }
-
-    private void searchNick(){
-        Query searchData = FirebaseDatabase.getInstance().getReference("UserData").orderByChild("nick").equalTo(regit_nick.getText().toString());
-        searchData.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-                    nickExistence = false;
-                }else{
-                    nickExistence = true;
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
     }
 
     private void RegisterNow(final String emailStr, String nickStr, String phoneStr, String passStr) {

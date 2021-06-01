@@ -72,8 +72,12 @@ public class Mission extends AppCompatActivity {
     }
 
     private void uploadData(){
+        String uid = fAuth.getCurrentUser().getUid();
+        DatabaseReference clearRef = FirebaseDatabase.getInstance().getReference()
+                .child("Mission").child(fid).child(uid).child("clear");
+        clearRef.setValue(0);
+
         for(int i=0; i<recognitionCheck.length; i++) { // score >= 0, len = 3
-            String uid = fAuth.getCurrentUser().getUid();
             DatabaseReference ref = FirebaseDatabase.getInstance().getReference()
                     .child("Mission").child(fid).child(uid).child("content"+content).child(""+i);
 

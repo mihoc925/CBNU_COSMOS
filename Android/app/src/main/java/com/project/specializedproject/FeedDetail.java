@@ -20,6 +20,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -36,8 +37,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
@@ -48,32 +51,42 @@ import java.util.Iterator;
 import java.util.Map;
 
 public class FeedDetail extends AppCompatActivity implements FeedDetailAdapter.clickEventListener{
-    // OnMapReadyCallback, GoogleMap.OnMapClickListener,
     final private String TAG = "FeedDetail";
+    public static Context detail_Context;
     RecyclerView rList;
     FeedDetailAdapter listAdapter;
     ArrayList<ModelFeed> mFeed = new ArrayList<>();
-    String[][] fArray = new String[5][5];
+    String[][] fArray = new String[5][6];
     int fArrayNum = 0;
     String fid;
     SupportMapFragment mapFragment;
     GoogleMap mMap;
     private Marker currentMarker = null;
 
+    NestedScrollView detail_scroll;
     ImageView detail_photo;
     TextView detail_title, detail_note;
     Button detail_complete;
-    String title, note, photo, location;
+    String title, note, photo, location, fd_item; // fd_item = 미션 가능 여부
     boolean backBtnCallback = false;
 
     ImageButton detail_zoomIn, detail_zoomOut;
     Button detail_courseLocation, detail_myLocation;
     boolean gpsLocation = true;
 
+    String tmpLoc0, tmpLoc1, tmpLoc2, tmpLoc3, tmpLoc4, tmpLoc5;
+    String[] location0 = new String[2];
+    String[] location1 = new String[2];
+    String[] location2 = new String[2];
+    String[] location3 = new String[2];
+    String[] location4 = new String[2];
+    String[] location5 = new String[2];
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed_detail);
+        detail_Context = this;
         Intent intent = getIntent();
         fid = intent.getExtras().getString("fid");
         setView();
@@ -103,14 +116,6 @@ public class FeedDetail extends AppCompatActivity implements FeedDetailAdapter.c
 
         AutoPermissions.Companion.loadAllPermissions(this, 100);
     }
-
-    String tmpLoc0, tmpLoc1, tmpLoc2, tmpLoc3, tmpLoc4, tmpLoc5;
-    String[] location0 = new String[2];
-    String[] location1 = new String[2];
-    String[] location2 = new String[2];
-    String[] location3 = new String[2];
-    String[] location4 = new String[2];
-    String[] location5 = new String[2];
 
     private void searchMap(){
         Query searchData = FirebaseDatabase.getInstance().getReference("Feed").orderByChild("fid").equalTo(fid);
@@ -144,6 +149,7 @@ public class FeedDetail extends AppCompatActivity implements FeedDetailAdapter.c
                         location4 = tmpLoc4.split("\n");
                     if(tmpLoc5 != null && !tmpLoc5.equals(""))
                         location5 = tmpLoc5.split("\n");
+
                     setDefaultLocation();
                 }
             }
@@ -183,7 +189,7 @@ public class FeedDetail extends AppCompatActivity implements FeedDetailAdapter.c
 
         missionMarker();
 
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(DEFAULT_LOCATION, 15);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(DEFAULT_LOCATION, 17);
         mMap.moveCamera(cameraUpdate);
     }
 
@@ -191,7 +197,8 @@ public class FeedDetail extends AppCompatActivity implements FeedDetailAdapter.c
         LatLng Mission_LOCATION;
         MarkerOptions markerOptions = new MarkerOptions();
         PolylineOptions polyOptions = new PolylineOptions().clickable(true);
-        polyOptions.add(new LatLng(Double.parseDouble(location0[0]), Double.parseDouble(location0[1])));
+        if(tmpLoc0 != null && !tmpLoc0.equals(""))
+            polyOptions.add(new LatLng(Double.parseDouble(location0[0]), Double.parseDouble(location0[1])));
 
         if(tmpLoc1 != null && !tmpLoc1.equals("")){
             Mission_LOCATION = new LatLng(Double.parseDouble(location1[0]), Double.parseDouble(location1[1]));
@@ -309,7 +316,7 @@ public class FeedDetail extends AppCompatActivity implements FeedDetailAdapter.c
     private void showCurrentLocation(Double latitude, Double longitude) {
         LatLng curPoint = new LatLng(latitude, longitude);
 
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(curPoint, 15));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(curPoint, 17));
 
         Toast.makeText(getApplicationContext(), "실행", Toast.LENGTH_LONG).show();
         String markerTitle = "내위치";
@@ -325,11 +332,12 @@ public class FeedDetail extends AppCompatActivity implements FeedDetailAdapter.c
         markerOptions.draggable(true);
         currentMarker = mMap.addMarker(markerOptions);
 
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(curPoint, 15);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(curPoint, 17);
         mMap.moveCamera(cameraUpdate);
     }
 
     private void setView(){
+        detail_scroll = findViewById(R.id.detail_scroll);
         rList = findViewById(R.id.recyclerDetail);
         detail_photo = findViewById(R.id.detail_photo);
         detail_title = findViewById(R.id.detail_title);
@@ -377,6 +385,7 @@ public class FeedDetail extends AppCompatActivity implements FeedDetailAdapter.c
                                     fArray[fArrayNum][2] = (String) map.get(photo);
                                     fArray[fArrayNum][3] = (String) map.get(location);
                                     fArray[fArrayNum][4] = (String) map.get("fid");
+                                    fArray[fArrayNum][5] = (String) map.get(fd_item); // 미션 가능 여부
 
                                     fArrayNum++;
                                 } else {
@@ -407,12 +416,18 @@ public class FeedDetail extends AppCompatActivity implements FeedDetailAdapter.c
         mf.setFeedW_photo(fArray[i][2]);
         mf.setFeedW_location(fArray[i][3]);
         mf.setFid(fArray[i][4]);
+        mf.setFd_item(fArray[i][5]);
         mFeed.add(mf);
     }
 
     public void onClick(View view){
         if( view.getId() == R.id.detail_complete ){
-            Toast.makeText(this, "미구현 기능입니다.",Toast.LENGTH_SHORT).show();
+            FirebaseAuth fAuth = FirebaseAuth.getInstance();
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference()
+                    .child("Mission").child(fid).child(fAuth.getCurrentUser().getUid()).child("clear");
+            ref.setValue(1);
+            finish();
+            Toast.makeText(this, "도전과제를 모두 완료했습니다!",Toast.LENGTH_SHORT).show();
         }else if( view.getId() == R.id.detail_courseLocation ){
             setDefaultLocation();
             detail_courseLocation.setBackgroundColor(Color.parseColor("#F2BA77"));
@@ -435,30 +450,35 @@ public class FeedDetail extends AppCompatActivity implements FeedDetailAdapter.c
                 note = "feedW_note1";
                 photo = "feedW_photo1";
                 location = "feedW_location1";
+                fd_item = "fd_item11";
                 break;
             case 1:
                 title = "feedW_title2";
                 note = "feedW_note2";
                 photo = "feedW_photo2";
                 location = "feedW_location2";
+                fd_item = "fd_item21";
                 break;
             case 2:
                 title = "feedW_title3";
                 note = "feedW_note3";
                 photo = "feedW_photo3";
                 location = "feedW_location3";
+                fd_item = "fd_item31";
                 break;
             case 3:
                 title = "feedW_title4";
                 note = "feedW_note4";
                 photo = "feedW_photo4";
                 location = "feedW_location4";
+                fd_item = "fd_item41";
                 break;
             case 4:
                 title = "feedW_title5";
                 note = "feedW_note5";
                 photo = "feedW_photo5";
                 location = "feedW_location5";
+                fd_item = "fd_item51";
                 break;
         }
     }
@@ -479,23 +499,4 @@ public class FeedDetail extends AppCompatActivity implements FeedDetailAdapter.c
             finish();
         }
     }
-
-//    @Override
-//    public void onMapReady(GoogleMap googleMap) {
-//        mMap = googleMap;
-//        LatLng location0 = new LatLng(36.7423, 127.4546);
-//
-//        MarkerOptions makerOptions = new MarkerOptions();
-//        makerOptions.position(location0).title("시작 지점");
-//        mMap.addMarker(makerOptions);
-//        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location0, 15));
-//        mMap.setOnMapClickListener(this::onMapClick);
-//
-//    }
-//
-//    @Override
-//    public void onMapClick(LatLng latLng) {
-//        Log.e(TAG, "ㅎㅇ");
-//
-//    }
 }

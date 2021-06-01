@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +20,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.Continuation;
@@ -31,14 +32,15 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -47,6 +49,15 @@ import static android.app.Activity.RESULT_OK;
 public class FragUser extends Fragment {
     private String TAG = "FragUser";
     Context mContext;
+
+    FirebaseAuth fAuth;
+    private ArrayList<ModelFeed> mFeed = new ArrayList<>();
+    FragUserAdapter userAdapter;
+    RecyclerView rList;
+    int fArrayNum = 0;
+    int proceedMission[] = new int[2]; // 비동기 처리
+    ArrayList<String> clearMission = new ArrayList<>();
+
 
     Dialog_Guide_Signup guideSignup;
 
@@ -57,7 +68,7 @@ public class FragUser extends Fragment {
 
     // 프로필 이미지
     Uri uri;
-    int proceedMaxNum[] = new int[2]; // Task 검증
+    int proceedMaxNum[] = new int[2]; // 비동기 처리
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseStorage firebaseStorage = FirebaseStorage.getInstance(); // 초기화 필수
     String photo;
@@ -67,14 +78,18 @@ public class FragUser extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_user, container, false);
         mContext = view.getContext();
+        fAuth = FirebaseAuth.getInstance();
         setView(view);
         searchMyProfile();
+        searchMission();
 
+        rList.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
+        userAdapter = new FragUserAdapter(mFeed, getContext());
+        rList.setAdapter(userAdapter);
         return view;
     }
 
     private void searchMyProfile() {
-        FirebaseAuth fAuth = FirebaseAuth.getInstance();
         DatabaseReference searchData = FirebaseDatabase.getInstance().getReference("UserData").child(fAuth.getCurrentUser().getUid());
         searchData.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -106,7 +121,65 @@ public class FragUser extends Fragment {
         });
     }
 
+
+    private void searchMission() {
+        proceedMission[0] = 0;
+        proceedMission[1] = 0;
+        Query searchData = FirebaseDatabase.getInstance().getReference("Mission")
+                .orderByChild(fAuth.getCurrentUser().getUid());
+        searchData.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                mFeed.clear();
+                fArrayNum = 0;
+
+                if(dataSnapshot.exists() && dataSnapshot.getChildrenCount() > 0){
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
+                        proceedMission[0]++;
+                        String fid = String.valueOf(snapshot.getKey());
+                        searchClearMission(fid);
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+    }
+
+    private void searchClearMission(String fid) {
+        DatabaseReference searchData = FirebaseDatabase.getInstance().getReference("Mission").child(fid)
+                .child(fAuth.getCurrentUser().getUid()).child("clear");
+        searchData.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                proceedMission[1]++;
+                if(dataSnapshot.getValue() != null) {
+                    if (Integer.parseInt(String.valueOf(dataSnapshot.getValue())) == 1) {
+                        clearMission.add(fid);
+                    }
+                }
+                if(proceedMission[0] == proceedMission[1]) {
+                    for (int i = 0; i < clearMission.size(); i++)
+                        addItem(i);
+                    userAdapter.notifyDataSetChanged();
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+    }
+
+    private void addItem(int i) {
+        ModelFeed mf = new ModelFeed();
+        mf.setFid(clearMission.get(i));
+        mFeed.add(mf);
+    }
+
     private void setView(View view){
+        rList = view.findViewById(R.id.user_travel);
         user_profileImg = view.findViewById(R.id.user_profileImg);
         user_nick = view.findViewById(R.id.user_nick);
         user_permission = view.findViewById(R.id.user_permission);
