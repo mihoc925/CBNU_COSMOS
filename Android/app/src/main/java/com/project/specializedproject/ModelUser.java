@@ -11,9 +11,10 @@ public class ModelUser {
 
     private String level;
     private String point;
+    private String uLocation;
 
     public ModelUser() {}
-    public ModelUser(String uid, String email, String nick, String permission, String phone, String profileImg, String level, String point) {
+    public ModelUser(String uid, String email, String nick, String permission, String phone, String profileImg, String level, String point, String uLocation) {
         this.uid = uid;
         this.email = email;
         this.nick = nick;
@@ -22,6 +23,7 @@ public class ModelUser {
         this.profileImg = profileImg;
         this.level = level;
         this.point = point;
+        this.uLocation = uLocation;
     }
 
     public String getUid() {
@@ -71,5 +73,11 @@ public class ModelUser {
     }
     public void setPoint(String point) {
         this.point = point;
+    }
+    public String getULocation() {
+        return uLocation;
+    }
+    public void setULocation(String location) {
+        this.uLocation = location;
     }
 }

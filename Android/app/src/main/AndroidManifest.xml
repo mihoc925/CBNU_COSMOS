@@ -33,7 +33,7 @@
         android:roundIcon="@mipmap/ic_cosmos"
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents.Light.NoActionBar.Bridge">
-        <activity android:name=".FeedWriteLocation"></activity>
+        <activity android:name=".FeedLocation" />
         <activity android:name=".Mission" />
         <activity android:name=".GuideList" />
         <activity android:name=".FeedDetail" />

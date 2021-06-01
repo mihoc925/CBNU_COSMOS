@@ -4,6 +4,8 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -12,7 +14,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -28,10 +29,16 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.pedro.library.AutoPermissions;
 
-public class FeedWriteLocation extends AppCompatActivity {
-    final private String TAG = "FeedWriteLocation";
+import java.io.IOException;
+import java.util.List;
+
+public class FeedLocation extends AppCompatActivity {
+    final private String TAG = "FeedLocation";
     SupportMapFragment mapFragment;
     GoogleMap mMap;
     private Marker currentMarker = null;
@@ -40,7 +47,9 @@ public class FeedWriteLocation extends AppCompatActivity {
 
     Double select_latitude, select_longitude;
     int content;
+    String state;
     boolean gpsLocation = true;
+    FirebaseAuth fAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +57,12 @@ public class FeedWriteLocation extends AppCompatActivity {
         setContentView(R.layout.activity_feed_write_location);
         Intent intent = getIntent();
         content = intent.getExtras().getInt("content");
+        state = intent.getExtras().getString("state");
         writeLocation_Btn = findViewById(R.id.writeLocation_Btn);
         writeLocation_myLocation = findViewById(R.id.writeLocation_myLocation);
         writeLocation_Btn.setOnClickListener(this::onClick);
         writeLocation_myLocation.setOnClickListener(this::onClick);
-
+        fAuth = FirebaseAuth.getInstance();
 
         //getMapAsync must be called on the Main thread.
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.writeLocation_Map);
@@ -79,7 +89,11 @@ public class FeedWriteLocation extends AppCompatActivity {
                         googleMap.clear();
                         googleMap.addMarker(markerOptions);
 
-                        setFeedWriteLocation(); // 위치 FeedWrite 페이지 저장
+                        if(state.equals("write"))
+                            setFeedLocation(); // 위치 FeedWrite 페이지 저장
+                        if(state.equals("list")) {
+                            setListLocation(); // 검색창 저장
+                        }
                     }
                 });
             }
@@ -92,8 +106,33 @@ public class FeedWriteLocation extends AppCompatActivity {
 
         AutoPermissions.Companion.loadAllPermissions(this, 100);
     }
+    
+    private void setListLocation(){
+        final Geocoder geocoder = new Geocoder(getApplicationContext());
+        List<Address> list = null;
+        try {
+            //미리 구해놓은 위도값 mLatitude;
+            //미리 구해놓은 경도값 mLongitude;
 
-    private void setFeedWriteLocation(){
+            list = geocoder.getFromLocation(
+                    select_latitude, // 위도
+                    select_longitude, // 경도
+                    10); // 얻어올 값의 개수
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (list != null) {
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference()
+                    .child("UserData").child(fAuth.getCurrentUser().getUid()).child("uLocation");
+            if (list.size()==0) {
+                ref.setValue("주소 정보가 없습니다");
+            } else {
+                ref.setValue(list.get(0).getAddressLine(0));
+            }
+        }
+    }
+
+    private void setFeedLocation(){
         if(content == 0)
             ((FeedWrite) FeedWrite.feedW_Context).feedW_location0.setText(select_latitude +"\n"+ select_longitude);
         else if (content == 1)
@@ -145,9 +184,9 @@ public class FeedWriteLocation extends AppCompatActivity {
             if (location != null) {
                 double latitude = location.getLatitude();
                 double longitude = location.getLongitude();
-                String msg = "최근 위치 ->  Latitue : " + latitude + "\nLongitude : " + longitude;
+//                String msg = "최근 위치 ->  Latitue : " + latitude + "\nLongitude : " + longitude;
                 showCurrentLocation(latitude, longitude);
-                Log.e(TAG, msg);
+//                Log.e(TAG, msg);
             }
 
             GPSListener gpsListener = new GPSListener();
@@ -170,8 +209,8 @@ public class FeedWriteLocation extends AppCompatActivity {
                 Double latitude = location.getLatitude();
                 Double longitude = location.getLongitude();
 
-                String message = "내 위치 -> Latitude : " + latitude + "\nLongitude:" + longitude;
-                Log.e("Map", message);
+//                String message = "내 위치 -> Latitude : " + latitude + "\nLongitude:" + longitude;
+//                Log.e("Map", message);
 
                 showCurrentLocation(latitude, longitude);
             }
@@ -196,7 +235,7 @@ public class FeedWriteLocation extends AppCompatActivity {
 
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(curPoint, 17));
 
-        Toast.makeText(getApplicationContext(), "실행", Toast.LENGTH_LONG).show();
+//        Toast.makeText(getApplicationContext(), "실행", Toast.LENGTH_LONG).show();
         String markerTitle = "내위치";
         String markerSnippet = "위치정보가 확인되었습니다.";
         if (currentMarker != null) currentMarker.remove();
@@ -215,7 +254,10 @@ public class FeedWriteLocation extends AppCompatActivity {
         // 현재 위치 자동 저장
         select_latitude = latitude; // 위도
         select_longitude = longitude; // 경도
-        setFeedWriteLocation(); // 위치 FeedWrite 페이지 저장
+        if(state.equals("write"))
+            setFeedLocation(); // 위치 FeedWrite 페이지 저장
+        if(state.equals("list"))
+            setListLocation();
     }
 
     public void onClick(View view){

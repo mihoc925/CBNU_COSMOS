@@ -45,7 +45,6 @@ public class FeedWrite extends AppCompatActivity {
     private String TAG = "FeedWrite";
     ProgressDialog pd;
     public static Context feedW_Context;
-    FeedWriteLocation feedWriteLocation;
 
     LinearLayout feedW_layout0, feedW_layout1, feedW_layout2, feedW_layout3, feedW_layout4, feedW_layout5;
     TextView feedW_title0, feedW_title1, feedW_title2, feedW_title3, feedW_title4, feedW_title5;
@@ -166,34 +165,40 @@ public class FeedWrite extends AppCompatActivity {
             }
         }else if(view.getId() == R.id.feedW_location0){ // -- default Location
             feedW_location0.setError(null);
-            Intent intent = new Intent(this, FeedWriteLocation.class);
+            Intent intent = new Intent(this, FeedLocation.class);
 //            intent.putExtra("fid",  fid); // 피드 번호
             intent.putExtra("content",  0); // 도전과제 번호
+            intent.putExtra("state",  "write");
             startActivity(intent);
         }else if(view.getId() == R.id.feedW_location1){
             feedW_location1.setError(null);
-            Intent intent = new Intent(this, FeedWriteLocation.class);
+            Intent intent = new Intent(this, FeedLocation.class);
             intent.putExtra("content",  1);
+            intent.putExtra("state",  "write");
             startActivity(intent);
         }else if(view.getId() == R.id.feedW_location2){
             feedW_location2.setError(null);
-            Intent intent = new Intent(this, FeedWriteLocation.class);
+            Intent intent = new Intent(this, FeedLocation.class);
             intent.putExtra("content",  2);
+            intent.putExtra("state",  "write");
             startActivity(intent);
         }else if(view.getId() == R.id.feedW_location3){
             feedW_location3.setError(null);
-            Intent intent = new Intent(this, FeedWriteLocation.class);
+            Intent intent = new Intent(this, FeedLocation.class);
             intent.putExtra("content",  3);
+            intent.putExtra("state",  "write");
             startActivity(intent);
         }else if(view.getId() == R.id.feedW_location4){
             feedW_location4.setError(null);
-            Intent intent = new Intent(this, FeedWriteLocation.class);
+            Intent intent = new Intent(this, FeedLocation.class);
             intent.putExtra("content",  4);
+            intent.putExtra("state",  "write");
             startActivity(intent);
         }else if(view.getId() == R.id.feedW_location5){
             feedW_location5.setError(null);
-            Intent intent = new Intent(this, FeedWriteLocation.class);
+            Intent intent = new Intent(this, FeedLocation.class);
             intent.putExtra("content",  5);
+            intent.putExtra("state",  "write");
             startActivity(intent);
         }
     }

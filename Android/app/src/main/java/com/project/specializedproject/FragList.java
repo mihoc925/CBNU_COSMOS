@@ -12,6 +12,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -48,9 +49,12 @@ public class FragList extends Fragment {
     String userPermission;
 
     LinearLayout list_locationLayout;
+    TextView list_search;
     ImageButton list_filter, list_write;
     Button list_guide_listBtn;
     Dialog_Filter dialogFilter;
+
+
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -163,7 +167,7 @@ public class FragList extends Fragment {
     private void searchMyProfile(){
         FirebaseAuth fAuth = FirebaseAuth.getInstance();
         DatabaseReference searchData = FirebaseDatabase.getInstance().getReference("UserData").child(fAuth.getCurrentUser().getUid());
-        searchData.addListenerForSingleValueEvent(new ValueEventListener() {
+        searchData.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists() && dataSnapshot.getChildrenCount() > 0){
@@ -175,6 +179,7 @@ public class FragList extends Fragment {
                         list_write.setVisibility(View.GONE);
                         userPermission = "Traveler";
                     }
+                    list_search.setText(user.getULocation());
                 }else{
                     list_write.setVisibility(View.GONE);
                     userPermission = "Traveler";
@@ -188,6 +193,7 @@ public class FragList extends Fragment {
 
     private void setView(View view){
         list_locationLayout = view.findViewById(R.id.list_locationLayout);
+        list_search = view.findViewById(R.id.list_search);
         list_filter = view.findViewById(R.id.list_filter);
         list_write = view.findViewById(R.id.list_write);
         list_guide_listBtn = view.findViewById(R.id.list_guide_listBtn);
@@ -200,6 +206,11 @@ public class FragList extends Fragment {
 
     public void onClick(View view){
         if(view.getId() == R.id.list_locationLayout){
+            Intent intent = new Intent(mContext, FeedLocation.class);
+            intent.putExtra("content",  0);
+            intent.putExtra("state",  "list");
+            startActivity(intent);
+
         }else if(view.getId() == R.id.list_filter){
             DisplayMetrics dm = getContext().getResources().getDisplayMetrics();
             int width = dm.widthPixels;

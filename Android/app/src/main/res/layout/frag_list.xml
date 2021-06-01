@@ -39,7 +39,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="25"/>
                 <TextView
-                    android:text="충북 청주시 여러분 담배꽁초"
+                    android:id="@+id/list_search"
                     android:ellipsize="end"
                     android:fontFamily="@font/binggrae"
                     android:textSize="12sp"

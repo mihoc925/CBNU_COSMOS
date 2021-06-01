@@ -119,14 +119,6 @@ public class FeedDetailAdapter extends RecyclerView.Adapter<FeedDetailAdapter.Vi
                 }
             });
         }
-
-        // end Count
-        if(contentNum[0] == mFeed.size()){
-            if(contentNum[0] == contentNum[1]) // nothing mission
-                ((FeedDetail) FeedDetail.detail_Context).detail_complete.setVisibility(View.GONE);
-            else
-                ((FeedDetail) FeedDetail.detail_Context).detail_complete.setVisibility(View.VISIBLE);
-        }
     }
 
     ArrayList<Integer> missionData = new ArrayList<>();
@@ -148,6 +140,7 @@ public class FeedDetailAdapter extends RecyclerView.Adapter<FeedDetailAdapter.Vi
                     for(int i=0; i<missionData.size(); i++) {
                         if(Integer.parseInt(String.valueOf(missionData.get(i))) == 0)
                             missionValue++;
+                        Log.e(TAG, "missionValue="+missionValue);
                         if(missionValue == 0){ // Complete
                             holder.dti_camera.setText("완료");
                             holder.dti_camera.setBackgroundResource(R.drawable.round_edge10_btn_1);

@@ -318,7 +318,7 @@ public class FeedDetail extends AppCompatActivity implements FeedDetailAdapter.c
 
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(curPoint, 17));
 
-        Toast.makeText(getApplicationContext(), "실행", Toast.LENGTH_LONG).show();
+//        Toast.makeText(getApplicationContext(), "실행", Toast.LENGTH_LONG).show();
         String markerTitle = "내위치";
         String markerSnippet = "위치정보가 확인되었습니다.";
 
